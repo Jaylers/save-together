@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SaveTogether</string>
+
+    <string name="message_retry">Retry</string>
+
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
