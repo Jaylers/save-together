@@ -5,4 +5,42 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="color_elderly">#F45B4A</color>
+    <color name="color_descendant">#544DE6</color>
+    <color name="color_elderly_overlay">#66F45B4A</color>
+    <color name="color_descendant_overlay">#66544DE6</color>
+
+    <color name="colorRed">#FF0000</color>
+    <color name="colorDeepOrange">#FF4000</color>
+    <color name="colorOrange">#FF8000</color>
+    <color name="colorDeepYellow">#FFBF00</color>
+    <color name="colorYellow">#FFFF00</color>
+    <color name="colorDeepLightGreen">#80FF00</color>
+    <color name="colorLightGreen">#40FF00</color>
+    <color name="colorGreen">#00FF00</color>
+    <color name="colorDeepGreen">#088A08</color>
+    <color name="colorBlueSky">#00FFFF</color>
+    <color name="colorBlue">#0000FF</color>
+    <color name="colorDeepBlue">#08088A</color>
+    <color name="colorPurple">#6A0888</color>
+    <color name="colorViolet">#8904B1</color>
+    <color name="colorDeepPink">#DF0174</color>
+    <color name="colorPastelPink">#ED1942</color>
+    <color name="colorPink">#FF00FF</color>
+    <color name="colorLightPink">#F781F3</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#424242</color>
+    <color name="colorSilver">#D8D8D8</color>
+    <color name="colorLightGray">#e6e6e6</color>
+    <color name="silver_gray">#cccccc</color>
+
+    <color name="silver_overlay">#66D8D8D8</color>
+    <color name="white_overlay">#66FFFFFF</color>
+    <color name="white_light_overlay">#33FFFFFF</color>
+    <color name="white_transparent">#11FFFFFF</color>
+    <color name="white_alpha">#20FFFFFF</color>
+    <color name="gray_overlay">#FF888888</color>
 </resources>

@@ -5,25 +5,50 @@
     android:background="#0099cc"
     tools:context="me.srichomthong.savetogether.SplashActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView
+    <RelativeLayout
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
 
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
+        <TextView
+            android:id="@+id/splash_msg_app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:keepScreenOn="true"
+            android:text="@string/app_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:layout_above="@+id/progressBar"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:indeterminateDrawable="@drawable/custom_progressbar_linear"
+            android:indeterminateDuration="1000" />
+
+        <TextView
+            android:id="@+id/txt_auth_message"
+            android:layout_below="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:text="@string/err_message_connecting"/>
+
+    </RelativeLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white_alpha"
         android:fitsSystemWindows="true">
 
         <LinearLayout
