@@ -36,46 +36,33 @@ public class BaseAuthFragment extends Fragment {
         return  view;
     }
 
-    @OnClick(R.id.relative_descendant)
-    public void relateDescendant(){
-        descendantSignIn();
+    @OnClick(R.id.img_customer) public void imgConsumer(){
+        customerSignIn();
     }
 
-    @OnClick(R.id.img_descendant)
-    public void imgDescendant(){
-        descendantSignIn();
+    @OnClick(R.id.img_restaurant) public void imgRestaurant(){
+        restaurantSignIn();
     }
 
-    @OnClick(R.id.relative_elderly)
-    public void relateElderly(){
-        elderlySignIn();
-    }
-
-    @OnClick(R.id.img_elderly)
-    public void imgElderly(){
-        elderlySignIn();
-    }
-
-    @OnClick(R.id.txt_language_setting)
-    public void language(){
+    @OnClick(R.id.txt_language_setting) public void language(){
         languageSetting();
     }
 
-    private void descendantSignIn(){
+    private void customerSignIn(){
         CustomerSignInFragment customerSignInFragment = new CustomerSignInFragment();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in,
+        ft.setCustomAnimations(R.anim.slide_up_in_from_buttom,
                 R.anim.fade_out);
         ft.replace(R.id.frame_fragment_base_auth, customerSignInFragment);
         ft.commit();
     }
 
-    private void elderlySignIn(){
+    private void restaurantSignIn(){
         RestaurantSignInFragment restaurantSignInFragment = new RestaurantSignInFragment();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in,
+        ft.setCustomAnimations(R.anim.slide_down_in,
                 R.anim.fade_out);
         ft.replace(R.id.frame_fragment_base_auth, restaurantSignInFragment);
         ft.commit();

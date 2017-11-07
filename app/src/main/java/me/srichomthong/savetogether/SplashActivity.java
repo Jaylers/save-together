@@ -111,7 +111,7 @@ public class SplashActivity extends AppCompatActivity {
         if (currentUser!=null){
             existingUser();
         }else {
-
+            openBaseAuth();
         }
     }
 
@@ -166,6 +166,16 @@ public class SplashActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    private void openBaseAuth(){
+        BaseAuthFragment baseAuthFragment = new BaseAuthFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in,
+                R.anim.fade_out);
+        ft.replace(R.id.frame_fragment_base_auth, baseAuthFragment);
+        ft.commit();
     }
 
     private int confirm = 0;
