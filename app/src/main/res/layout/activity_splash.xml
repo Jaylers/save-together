@@ -41,7 +41,7 @@
             android:layout_margin="10dp"
             android:textAlignment="center"
             android:textSize="15sp"
-            android:text="@string/err_message_connecting"/>
+            android:text="@string/app_message_connecting"/>
 
     </RelativeLayout>
 
@@ -59,6 +59,7 @@
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/black_overlay"
             android:orientation="horizontal"
+            android:animateLayoutChanges="true"
             tools:ignore="UselessParent">
 
             <Button
