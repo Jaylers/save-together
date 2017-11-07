@@ -1,13 +1,20 @@
 package me.srichomthong.savetogether;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.srichomthong.savetogether.together.Connection;
 
@@ -56,31 +63,53 @@ public class SplashActivity extends AppCompatActivity {
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
+    @BindView(R.id.txt_auth_message) TextView auth_message;
     Connection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ButterKnife.bind(this);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
         connection = new Connection(SplashActivity.this);
+        connectionVerify();
+    }
+
+    private void connectionVerify(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (connection.isConnection()){
+                    auth_message.setText(getString(R.string.app_message_verifying));
+                    userVerify();
+                }else {
+                    auth_message.setText(getString(R.string.err_message_connection_failure));
+                    Animation animation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.slide_up_in_from_buttom);
+                    animation.setDuration(200);
+                    mControlsView.startAnimation(animation);
+                    mControlsView.setVisibility(View.VISIBLE);
+                }
+            }
+        },2000);
+    }
+
+    private void userVerify(){
 
     }
 
-    private void verify(){
-        if (connection.isConnection()){
-            mControlsView.setVisibility(View.GONE);
-        }else {
-            mControlsView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @OnClick(R.id.splash_btn_retry) public void onReset(){
-
+    @OnClick(R.id.splash_btn_retry) public void onRetry(){
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_down_out);
+        animation.setDuration(200);
+        mControlsView.startAnimation(animation);
+        mControlsView.setVisibility(View.GONE);
+        auth_message.setText(getString(R.string.app_message_connecting));
+        connectionVerify();
     }
 
 
@@ -122,5 +151,4 @@ public class SplashActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
-
 }
