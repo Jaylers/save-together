@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@color/colorBlueDtac"
+    android:id="@+id/frame_fragment_base_auth"
     tools:context="me.srichomthong.savetogether.SplashActivity">
 
     <RelativeLayout
@@ -68,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/message_retry" />
+                android:text="@string/app_message_retry" />
 
         </LinearLayout>
     </FrameLayout>

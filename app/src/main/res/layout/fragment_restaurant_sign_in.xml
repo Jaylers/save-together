@@ -1,0 +1,88 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_descendant"
+    tools:context="me.srichomthong.savetogether.center.CustomerSignInFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_auth_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/edt_margin_default"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_launcher_background"/>
+        <TextView
+            android:id="@+id/txt_des_title"
+            android:layout_below="@id/img_auth_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:text="@string/auth_message_user_gmail" />
+
+        <EditText
+            android:id="@+id/edt_des_username"
+            android:layout_below="@+id/txt_des_title"
+            style="@style/button_square_style"
+            android:hint="@string/auth_message_username"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/edt_margin_default"
+            android:layout_marginStart="@dimen/edt_margin_default"
+            android:layout_marginEnd="@dimen/edt_margin_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"/>
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_below="@id/edt_des_username"
+            android:padding="5dp"
+            android:background="@color/gray_overlay"
+            android:layout_marginTop="@dimen/edt_margin_line_between_default_10"
+            android:layout_marginBottom="@dimen/edt_margin_line_between_default_10"
+            android:layout_marginEnd="@dimen/edt_margin_default"
+            android:layout_marginStart="@dimen/edt_margin_default"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <EditText
+            android:id="@+id/edt_customer_username"
+            android:layout_below="@+id/v_line"
+            android:hint="@string/app_message_password"
+            style="@style/button_square_style"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/edt_margin_line_between_default_10"
+            android:layout_marginStart="@dimen/edt_margin_default"
+            android:layout_marginEnd="@dimen/edt_margin_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"/>
+
+        <Button
+            android:id="@+id/btn_frag_des_create"
+            android:layout_below="@id/edt_customer_username"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            style="@style/button_round_style"
+            android:text="@string/action_sign_in"
+            android:layout_marginTop="@dimen/edt_margin_line_between_default_10"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"/>
+
+        <TextView
+            android:id="@+id/txt_des_back"
+            android:text="@string/app_message_back"
+            android:layout_marginStart="10dp"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</FrameLayout>
