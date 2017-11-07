@@ -5,17 +5,26 @@
     <string name="auth_message_user_gmail">User Gmail Account</string>
     <string name="auth_message_username">Username</string>
     <string name="auth_message_sign_in">Sign in</string>
+    <string name="auth_message_im_the_restaurant">I\'m the restaurant</string>
+    <string name="auth_message_im_consumer">I\'m consumer</string>
 
     //Error message
     <string name="err_message_required">Required</string>
     <string name="err_message_connection_failure">Network connection error \n Please check your connection</string>
+    <string name="err_unknown">Unknown</string>
+    <string name="err_unknown_error">Something wrong! That\'s all we know.</string>
+    <string name="err_connection_error">Connection error</string>
 
-    //Normal message
-    <string name="message_back">Back</string>
-    <string name="message_close">Close</string>
-    <string name="message_retry">Retry</string>
+    //Dangerous
     <string name="app_message_request_permission_call">Please allow us to make a Call</string>
     <string name="app_message_permission_denied">Permission denied</string>
+    <string name="app_message_connected_via_wifi">Connection property on WIFI</string>
+    <string name="app_message_connected_via_mobile_network">Connection property on MOBILE Data, Remember data charges may apply</string>
+
+    //Normal message
+    <string name="app_message_back">Back</string>
+    <string name="app_message_close">Close</string>
+    <string name="app_message_retry">Retry</string>
     <string name="app_message_ok">OK</string>
     <string name="app_message_cancel">Cancel</string>
     <string name="app_message_confirm_to_close_app">Press back again to close</string>
@@ -27,13 +36,13 @@
     <string name="app_message_language">language</string>
     <string name="app_message_sign_out">sign out</string>
     <string name="app_message_connecting">Connecting . .</string>
-    <string name="app_message_loging_in">Loging in . .</string>
+    <string name="app_message_signing_in">Signing in . .</string>
     <string name="app_message_verifying">Verifying . .</string>
-    <string name="title_activity_customer_login">Sign in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="app_message_password">Password</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -43,4 +52,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    //Language
+    <string name="language_thailand"> ภาษาไทย</string>
+    <string name="language_english"> English</string>
 </resources>
