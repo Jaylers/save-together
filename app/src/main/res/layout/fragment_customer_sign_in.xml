@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_elderly"
+    android:background="@color/color_customer_theme"
     tools:context="me.srichomthong.savetogether.center.RestaurantSignInFragment">
 
     <RelativeLayout
@@ -91,7 +91,7 @@
             android:layout_marginEnd="80dp"/>
 
         <TextView
-            android:id="@+id/txt_eld_back"
+            android:id="@+id/txt_cus_back"
             android:text="@string/app_message_back"
             android:layout_marginStart="10dp"
             android:padding="10dp"

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_descendant"
+    android:background="@color/color_restaurant_theme"
     tools:context="me.srichomthong.savetogether.center.CustomerSignInFragment">
 
     <RelativeLayout
@@ -69,13 +69,13 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             style="@style/button_round_style"
-            android:text="@string/action_sign_in"
+            android:text="@string/action_sign_in_short"
             android:layout_marginTop="@dimen/edt_margin_line_between_default_10"
             android:layout_marginStart="80dp"
             android:layout_marginEnd="80dp"/>
 
         <TextView
-            android:id="@+id/txt_des_back"
+            android:id="@+id/txt_res_back"
             android:text="@string/app_message_back"
             android:layout_marginStart="10dp"
             android:padding="10dp"

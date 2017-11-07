@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Save Together</string>
+    <string name="app_name_double_line">Save\nTogether</string>
 
     //Auth
     <string name="auth_message_user_gmail">User Gmail Account</string>
     <string name="auth_message_username">Username</string>
     <string name="auth_message_sign_in">Sign in</string>
-    <string name="auth_message_im_the_restaurant">I\'m the restaurant</string>
-    <string name="auth_message_im_consumer">I\'m consumer</string>
+    <string name="auth_message_im_the_restaurant">I\'m the\nrestaurant</string>
+    <string name="auth_message_im_consumer">I\'m\nconsumer</string>
 
     //Error message
     <string name="err_message_required">Required</string>
