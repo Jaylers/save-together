@@ -1,4 +1,4 @@
-package me.srichomthong.savetogether.together.sharedstring;
+package me.srichomthong.savetogether.utility.sharedstring;
 
 /**
  * Created by jaylerr on 03-Jun-17.

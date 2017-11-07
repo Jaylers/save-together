@@ -1,8 +1,9 @@
 package me.srichomthong.savetogether;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +11,17 @@ import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.srichomthong.savetogether.together.Connection;
+import me.srichomthong.savetogether.center.BaseAuthFragment;
+import me.srichomthong.savetogether.utility.manager.ConnectionsManager;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -64,7 +69,8 @@ public class SplashActivity extends AppCompatActivity {
     //////////////////////////////////////////////////////////////////////////
 
     @BindView(R.id.txt_auth_message) TextView auth_message;
-    Connection connection;
+    ConnectionsManager connection;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-        connection = new Connection(SplashActivity.this);
+        connection = new ConnectionsManager(SplashActivity.this);
         connectionVerify();
     }
 
@@ -100,7 +106,18 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void userVerify(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser!=null){
+            existingUser();
+        }else {
 
+        }
+    }
+
+    private void existingUser(){
+        auth_message.setText(getString(R.string.app_message_signing_in));
+        //Log in automatically
     }
 
     @OnClick(R.id.splash_btn_retry) public void onRetry(){
@@ -111,7 +128,6 @@ public class SplashActivity extends AppCompatActivity {
         auth_message.setText(getString(R.string.app_message_connecting));
         connectionVerify();
     }
-
 
 
     @Override
@@ -150,5 +166,40 @@ public class SplashActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    private int confirm = 0;
+    @Override
+    public void onBackPressed() {
+        Fragment currentFragment = getSupportFragmentManager()
+                .findFragmentById(R.id.frame_fragment_base_auth);
+
+        BaseAuthFragment baseAuthFragment = new BaseAuthFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        if (currentFragment instanceof BaseAuthFragment){
+            if (confirm>=1){
+                confirm = 0;
+                finish();
+            }else {
+                confirm++;
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        getString(R.string.app_message_confirm_to_close_app),
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        confirm = 0;
+                    }
+                },2000);
+            }
+        }else {
+            ft.setCustomAnimations(R.anim.fade_in,
+                    R.anim.fade_out);
+            ft.replace(R.id.frame_fragment_base_auth, baseAuthFragment);
+            ft.commit();
+        }
     }
 }
