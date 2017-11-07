@@ -169,6 +169,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void openBaseAuth(){
+        mContentView.setVisibility(View.GONE);
         BaseAuthFragment baseAuthFragment = new BaseAuthFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();

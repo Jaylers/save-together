@@ -38,6 +38,24 @@ public class CustomerSignInFragment extends Fragment {
         return view;
     }
 
+    @OnClick(R.id.img_email_sign_in) public void onEmailSign(){
+        EmailSignFragment emailSignFragment = new EmailSignFragment();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in,
+                R.anim.fade_out);
+        ft.replace(R.id.frame_fragment_base_auth, emailSignFragment);
+        ft.commit();
+    }
+
+    @OnClick(R.id.img_facebook_sign_in) public void onFacebook(){
+
+    }
+
+    @OnClick(R.id.img_google_sign_in) public void onGoogle(){
+
+    }
+
     @OnClick(R.id.txt_cus_back) public void onBack(){
         BaseAuthFragment baseAuthFragment = new BaseAuthFragment();
         FragmentManager manager = getFragmentManager();
