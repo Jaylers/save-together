@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlueDtac"
+    android:background="@color/colorWhite"
     android:id="@+id/frame_fragment_base_auth"
     tools:context="me.srichomthong.savetogether.SplashActivity">
 

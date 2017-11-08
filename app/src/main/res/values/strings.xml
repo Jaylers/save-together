@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Save Together</string>
     <string name="app_name_double_line">Save\nTogether</string>
+    <string name="team_name">Save Yours World</string>
 
     //Auth
     <string name="auth_message_user_gmail">User Gmail Account</string>
@@ -61,6 +62,10 @@
     <string name="language_thailand"> ภาษาไทย</string>
     <string name="language_english"> English</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_customer_main">CustomerMainActivity</string>
+    <string name="customer_main_title_home">Home</string>
+    <string name="customer_main_title_review">Review</string>
+    <string name="customer_main_title_near_by">Near By</string>
+    <string name="customer_main_title_save">Save</string>
+    <string name="customer_main_title_profile">Profile</string>
 </resources>

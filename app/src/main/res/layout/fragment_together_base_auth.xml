@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context="me.srichomthong.savetogether.center.BaseAuthFragment">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBlueDtac">
+        android:background="@color/colorWhite">
         <View
             android:id="@+id/line_left"
             android:layout_width="90dp"
@@ -16,7 +17,7 @@
             android:layout_marginStart="30dp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:background="@color/colorWhite"/>
+            android:background="@color/colorGray"/>
 
         <View
             android:id="@+id/line_right"
@@ -25,20 +26,21 @@
             android:layout_marginEnd="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:background="@color/colorWhite"/>
+            android:background="@color/colorGray"/>
 
         <TextView
             android:id="@+id/txt_app_name"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/app_name_double_line"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:gravity="center"
             android:textSize="25sp"
-            android:padding="5dp"
-            android:textStyle="bold"
-            android:text="@string/app_name_double_line"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_language_setting"
@@ -66,14 +68,17 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="25dp"
                 android:src="@drawable/ic_oval_pink" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/auth_message_im_the_restaurant"
+                android:textColor="@color/color_restaurant_text"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                android:text="@string/auth_message_im_the_restaurant"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -98,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textStyle="bold"
+                    android:textColor="@color/color_customer_text"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     android:text="@string/auth_message_im_consumer"/>
