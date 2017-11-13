@@ -34,14 +34,10 @@ public class ConnectionsManager {
                 if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
                     // connected to wifi
                     Log.i(TAG, activity.getString(R.string.app_message_connected_via_wifi));
-                    Toast.makeText(activity, activity.getString(R.string.app_message_connected_via_wifi),
-                            Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
                     // connected to the mobile provider's data plan
                     Log.i(TAG, activity.getString(R.string.app_message_connected_via_mobile_network));
-                    Toast.makeText(activity, activity.getString(R.string.app_message_connected_via_mobile_network),
-                            Toast.LENGTH_SHORT).show();
                     return true;
                 }
             } else {

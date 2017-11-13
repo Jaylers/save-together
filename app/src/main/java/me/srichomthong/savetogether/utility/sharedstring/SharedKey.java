@@ -6,6 +6,7 @@ package me.srichomthong.savetogether.utility.sharedstring;
 
 public class SharedKey {
     public static String key_sign_in =                  "SIGN_IN";
+    public static String key_user_type =                "USER_TYPE";
 
     //Setting
     public static String key_settings =                 "SETTING";

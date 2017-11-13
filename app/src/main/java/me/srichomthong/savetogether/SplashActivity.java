@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.srichomthong.savetogether.center.BaseAuthFragment;
+import me.srichomthong.savetogether.center.SelectionAuthFragment;
 import me.srichomthong.savetogether.utility.manager.ConnectionsManager;
 
 /**
@@ -170,12 +170,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private void openBaseAuth(){
         mContentView.setVisibility(View.GONE);
-        BaseAuthFragment baseAuthFragment = new BaseAuthFragment();
+        SelectionAuthFragment selectionAuthFragment = new SelectionAuthFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         ft.setCustomAnimations(R.anim.fade_in,
                 R.anim.fade_out);
-        ft.replace(R.id.frame_fragment_base_auth, baseAuthFragment);
+        ft.replace(R.id.frame_fragment_base_auth, selectionAuthFragment);
         ft.commit();
     }
 
@@ -185,10 +185,10 @@ public class SplashActivity extends AppCompatActivity {
         Fragment currentFragment = getSupportFragmentManager()
                 .findFragmentById(R.id.frame_fragment_base_auth);
 
-        BaseAuthFragment baseAuthFragment = new BaseAuthFragment();
+        SelectionAuthFragment selectionAuthFragment = new SelectionAuthFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        if (currentFragment instanceof BaseAuthFragment){
+        if (currentFragment instanceof SelectionAuthFragment){
             if (confirm>=1){
                 confirm = 0;
                 finish();
@@ -209,7 +209,7 @@ public class SplashActivity extends AppCompatActivity {
         }else {
             ft.setCustomAnimations(R.anim.fade_in,
                     R.anim.fade_out);
-            ft.replace(R.id.frame_fragment_base_auth, baseAuthFragment);
+            ft.replace(R.id.frame_fragment_base_auth, selectionAuthFragment);
             ft.commit();
         }
     }
