@@ -3,6 +3,7 @@ package me.srichomthong.savetogether.center;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -89,7 +91,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
+        mLoginFormView = findViewById(R.id.email_login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
@@ -282,10 +284,17 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
+    @OnClick(R.id.txt_email_sign_in_back) public void onBack(){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(EmailSignInActivity.this, SignInActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -334,6 +343,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
             mAuthTask = null;
             showProgress(false);
         }
+
     }
 }
 

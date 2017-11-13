@@ -66,19 +66,14 @@ public class SignInActivity extends AppCompatActivity {
     //On Back//////////////////////////////////////////////////////////////////////////////////
 
     @OnClick(R.id.txt_sign_in_back)public void OnBack(){
-        onBack();
+        onBackPressed();
     }
 
     @Override
     public void onBackPressed() {
-        onBack();
-    }
-
-    private void onBack(){
         Intent intent = new Intent(SignInActivity.this, SplashActivity.class);
         startActivity(intent);
         this.finish();
     }
-
     ////////////////////////////////////////////////////////////////////////////////////////////
 }

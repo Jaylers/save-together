@@ -25,7 +25,7 @@ public class SharedSignedUser {
 
     public void setTypeOfUser(String type){
         editor.putString(SharedKey.key_user_type,type);
-        editor.apply();
+        editor.commit();
     }
 
     public String getTypeOfUser(){

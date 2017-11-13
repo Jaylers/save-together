@@ -49,9 +49,6 @@ public class SelectionAuthFragment extends Fragment {
         restaurantSignIn();
     }
 
-    @OnClick(R.id.txt_language_setting) public void language(){
-        languageSetting();
-    }
 
     private void customerSignIn(){
         sharedSignedUser.setTypeOfUser(SharedFlag.flag_customer);
@@ -65,15 +62,5 @@ public class SelectionAuthFragment extends Fragment {
         Intent intent = new Intent(activity, SignInActivity.class);
         startActivity(intent);
         activity.finish();
-    }
-
-    private void languageSetting(){
-//        LanguageListFragment lang = new LanguageListFragment();
-//        FragmentManager manager = getFragmentManager();
-//        FragmentTransaction ft = manager.beginTransaction();
-//        ft.setCustomAnimations(R.anim.slide_up_in_from_buttom,
-//                R.anim.slide_up_out);
-//        ft.replace(R.id.frame_fragment_base_auth, lang);
-//        ft.commit();
     }
 }
