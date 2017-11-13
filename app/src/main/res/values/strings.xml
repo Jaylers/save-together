@@ -3,6 +3,9 @@
     <string name="app_name_double_line">Save\nTogether</string>
     <string name="team_name">Save Yours World</string>
 
+    <string name="facebook_app_id">463835870676974</string>
+    <string name="fb_login_protocol_scheme">fb463835870676974</string>
+
     //Auth
     <string name="auth_message_user_gmail">User Gmail Account</string>
     <string name="auth_message_username">Username</string>

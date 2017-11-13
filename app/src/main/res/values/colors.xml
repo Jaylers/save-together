@@ -2,13 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ffa500</color>
 
     <color name="black_overlay">#66000000</color>
 
-    <color name="color_elderly">#F45B4A</color>
     <color name="color_descendant">#544DE6</color>
-    <color name="color_elderly_overlay">#66F45B4A</color>
     <color name="color_descendant_overlay">#66544DE6</color>
 
     <color name="colorRed">#FF0000</color>
