@@ -58,7 +58,7 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    style="@style/button_round_style"
+                    style="@style/button_square_style"
                     android:layout_marginStart="50dp"
                     android:layout_marginEnd="50dp"
                     android:singleLine="true" />
@@ -81,7 +81,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    style="@style/button_round_style"
+                    style="@style/button_square_style"
                     android:layout_marginStart="50dp"
                     android:layout_marginEnd="50dp"
                     android:singleLine="true" />

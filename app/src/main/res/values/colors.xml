@@ -6,8 +6,10 @@
 
     <color name="black_overlay">#66000000</color>
 
-    <color name="color_descendant">#544DE6</color>
-    <color name="color_descendant_overlay">#66544DE6</color>
+    <color name="color_customer_theme">#F1C40F</color>
+    <color name="color_customer_text">#9DBBD8</color>
+    <color name="color_restaurant_theme">#E26A6A</color>
+    <color name="color_restaurant_text">#444fAD</color>
 
     <color name="colorRed">#FF0000</color>
     <color name="colorDeepOrange">#FF4000</color>
@@ -42,9 +44,5 @@
     <color name="white_transparent">#11FFFFFF</color>
     <color name="white_alpha">#20FFFFFF</color>
     <color name="gray_overlay">#FF888888</color>
-    <color name="color_customer_theme">#f1c40f</color>
-    <color name="color_customer_text">#9dbbd8</color>
-    <color name="color_restaurant_theme">#e26a6a</color>
-    <color name="color_restaurant_text">#444fad</color>
 
 </resources>
