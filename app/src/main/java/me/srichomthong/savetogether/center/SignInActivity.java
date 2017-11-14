@@ -23,7 +23,6 @@ public class SignInActivity extends AppCompatActivity {
 
     private ColorManager colorManager;
     private SharedSignedUser sharedSignedUser;
-    private SharedFlag sharedFlag;
     @BindView(R.id.sign_in_txt_title) TextView text_title;
     @BindView(R.id.sign_in_container) ConstraintLayout background;
 
@@ -32,8 +31,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_base_sign_in);
         ButterKnife.bind(this);
+
         colorManager = new ColorManager();
-        sharedFlag = new SharedFlag();
         sharedSignedUser = new SharedSignedUser(SignInActivity.this);
         whoImI(sharedSignedUser.getTypeOfUser());
     }
@@ -41,10 +40,10 @@ public class SignInActivity extends AppCompatActivity {
     private void whoImI(String userType){
         if (userType.equals(SharedFlag.flag_restaurant)){
             text_title.setText(getString(R.string.auth_message_im_the_restaurant));
-            background.setBackground(colorManager.getColorDrawable(colorManager.parser(sharedFlag.flag_restaurant_color_theme)));
+            background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
         }else if (userType.equals(SharedFlag.flag_customer)){
             text_title.setText(getString(R.string.auth_message_im_consumer));
-            background.setBackground(colorManager.getColorDrawable(colorManager.parser(sharedFlag.flag_customer_color_theme)));
+            background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
         }else {
             Toast.makeText(getApplicationContext(),
                     getString(R.string.err_unknown_error), Toast.LENGTH_SHORT).show();

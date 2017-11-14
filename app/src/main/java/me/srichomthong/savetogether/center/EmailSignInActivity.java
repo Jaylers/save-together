@@ -29,14 +29,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
+import me.srichomthong.savetogether.utility.manager.ColorManager;
+import me.srichomthong.savetogether.utility.sharedpreference.SharedSignedUser;
+import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -62,6 +67,11 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private ColorManager colorManager;
+    private SharedSignedUser sharedSignedUser;
+
+    @BindView(R.id.email_sign_title) TextView text_title;
+    @BindView(R.id.linear_email_sign_in) LinearLayout background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +104,20 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
 
         mLoginFormView = findViewById(R.id.email_login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        colorManager = new ColorManager();
+        sharedSignedUser = new SharedSignedUser(EmailSignInActivity.this);
+        whoImI(sharedSignedUser.getTypeOfUser());
+    }
+
+    private void whoImI(String userType){
+        if (userType.equals(SharedFlag.flag_restaurant)){
+            text_title.setText(getString(R.string.auth_message_im_the_restaurant));
+            background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
+        }else if (userType.equals(SharedFlag.flag_customer)){
+            text_title.setText(getString(R.string.auth_message_im_consumer));
+            background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
+        }
     }
 
     private void populateAutoComplete() {
