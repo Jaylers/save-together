@@ -3,6 +3,7 @@ package me.srichomthong.savetogether.utility.manager;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.view.Gravity;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 
@@ -26,6 +27,15 @@ public class ToastManager {
 
     public void displayInfo(String message){
         FancyToast.makeText(activity,message,FancyToast.LENGTH_LONG, FancyToast.INFO,true).show();
+    }
+
+    public void displayInfoOnTop(String message){
+        FancyToast fancyToast = new FancyToast(activity);
+        fancyToast.setText(message);
+        fancyToast.setDuration(FancyToast.LENGTH_LONG);
+        fancyToast.setText(FancyToast.INFO);
+        fancyToast.setGravity(Gravity.TOP,0,0);
+        fancyToast.show();
     }
 
     public void displayWarning(String message){

@@ -37,19 +37,17 @@ public class ConnectionsManager {
             if (activeNetwork != null) { // connected to the internet
                 if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
                     // connected to wifi
-                    toast.displayInfo(activity.getString(R.string.app_message_connected_via_wifi));
+//                    toast.displayInfo(activity.getString(R.string.app_message_connected_via_wifi));
                     Log.i(TAG, activity.getString(R.string.app_message_connected_via_wifi));
                     return true;
                 } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
                     // connected to the mobile provider's data plan
-                    toast.displayInfo(activity.getString(R.string.app_message_connected_via_mobile_network));
+//                    toast.displayInfo(activity.getString(R.string.app_message_connected_via_mobile_network));
                     Log.i(TAG, activity.getString(R.string.app_message_connected_via_mobile_network));
                     return true;
                 }
             } else {
                 Log.e(TAG, activity.getString(R.string.err_connection_error));
-                Toast.makeText(activity, activity.getString(R.string.err_connection_error),
-                        Toast.LENGTH_SHORT).show();
                 return false;
             }
 

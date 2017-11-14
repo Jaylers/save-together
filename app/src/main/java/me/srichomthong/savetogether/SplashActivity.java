@@ -1,6 +1,7 @@
 package me.srichomthong.savetogether;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,8 @@ import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     };
     private View mControlsView;
+    private View mControlsView_sign_out;
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
         public void run() {
@@ -65,6 +69,7 @@ public class SplashActivity extends AppCompatActivity {
     @BindView(R.id.txt_auth_message) TextView auth_message;
     ConnectionsManager connection;
     private FirebaseAuth mAuth;
+    @BindView(R.id.splash_progressBar) ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
+        mControlsView_sign_out = findViewById(R.id.fullscreen_content_controls_2);
         mContentView = findViewById(R.id.fullscreen_content);
 
         connection = new ConnectionsManager(SplashActivity.this);
@@ -89,6 +95,7 @@ public class SplashActivity extends AppCompatActivity {
                     auth_message.setText(getString(R.string.app_message_verifying));
                     userVerify();
                 }else {
+                    progressBar.setVisibility(View.INVISIBLE);
                     auth_message.setText(getString(R.string.err_message_connection_failure));
                     Animation animation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.slide_up_in_from_buttom);
                     animation.setDuration(200);
@@ -96,12 +103,13 @@ public class SplashActivity extends AppCompatActivity {
                     mControlsView.setVisibility(View.VISIBLE);
                 }
             }
-        },1500);
+        },2000);
     }
 
+    private FirebaseUser currentUser;
     private void userVerify(){
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         if (currentUser!=null){
             existingUser();
         }else {
@@ -110,19 +118,37 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void existingUser(){
+        Animation animation = AnimationUtils.loadAnimation(SplashActivity.this,
+                R.anim.slide_up_in_from_buttom);
+        animation.setDuration(200);
+        mControlsView_sign_out.startAnimation(animation);
+        mControlsView_sign_out.setVisibility(View.VISIBLE);
         auth_message.setText(getString(R.string.app_message_signing_in));
-        //Log in automatically
+
     }
 
     @OnClick(R.id.splash_btn_retry) public void onRetry(){
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_down_out);
         animation.setDuration(200);
+        progressBar.setVisibility(View.VISIBLE);
         mControlsView.startAnimation(animation);
         mControlsView.setVisibility(View.GONE);
         auth_message.setText(getString(R.string.app_message_connecting));
         connectionVerify();
     }
 
+    @OnClick(R.id.splash_btn_log_out) public void onSignOut(){
+        Animation animation = AnimationUtils.loadAnimation(SplashActivity.this,
+                R.anim.slide_down_out);
+        animation.setDuration(200);
+        mControlsView_sign_out.startAnimation(animation);
+        mControlsView_sign_out.setVisibility(View.INVISIBLE);
+
+        mAuth.signOut();
+        Intent intent = new Intent(SplashActivity.this, SplashActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
