@@ -7,13 +7,12 @@
     <string name="fb_login_protocol_scheme">fb463835870676974</string>
 
     //Auth
-    <string name="auth_message_user_gmail">User Gmail Account</string>
-    <string name="auth_message_username">Username</string>
-    <string name="auth_message_sign_in">Sign in</string>
-    <string name="auth_message_sign_up">Sign up</string>
-    <string name="auth_message_with_email">Sign up with email</string>
-    <string name="auth_message_im_the_restaurant">I\'m the\nrestaurant</string>
-    <string name="auth_message_im_consumer">I\'m\nconsumer</string>
+    <string name="app_message_user_gmail">User Gmail Account</string>
+    <string name="app_message_username">Username</string>
+    <string name="app_message_with_email">Sign up with email</string>
+    <string name="app_message_im_the_restaurant">I\'m the\nrestaurant</string>
+    <string name="app_message_im_consumer">I\'m\nconsumer</string>
+    <string name="app_message_sign_up_success">Sign up successfully</string>
 
     //Error message
     <string name="err_message_required">Required</string>
@@ -21,6 +20,7 @@
     <string name="err_unknown">Unknown</string>
     <string name="err_unknown_error">Something wrong! That\'s all we know.</string>
     <string name="err_connection_error">Connection error</string>
+    <string name="err_sign_up_failure">Something wrong, Sign up failure</string>
 
     //Dangerous
     <string name="app_message_request_permission_call">Please allow us to make a Call</string>
@@ -42,7 +42,6 @@
     <string name="app_message_call">Call</string>
     <string name="app_message_app_language">Application language is : </string>
     <string name="app_message_language">language</string>
-    <string name="app_message_sign_out">sign out</string>
     <string name="app_message_connecting">Connecting . .</string>
     <string name="app_message_one_moment">One moment . .</string>
     <string name="app_message_signing_in">Signing in . .</string>
@@ -55,13 +54,13 @@
     <string name="app_message_password">Password</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_re_password">Confirm Password</string>
-    <string name="action_register">Register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="app_message_sign_up">Sign up</string>
+    <string name="app_message_sign_in">Sign in</string>
+    <string name="app_message_sign_out">sign out</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_invalid_re_password">Your password and confirmation password doesn\'t match.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -70,7 +69,6 @@
     <string name="language_thailand"> ภาษาไทย</string>
     <string name="language_english"> English</string>
 
-    <string name="title_activity_customer_main">CustomerMainActivity</string>
     <string name="customer_main_title_home">Home</string>
     <string name="customer_main_title_review">Review</string>
     <string name="customer_main_title_near_by">Near By</string>
@@ -80,4 +78,5 @@
     <string name="title_activity_sign_in">Sign in</string>
     <string name="title_activity_sign_in_selection">Sign in with Email</string>
     <string name="title_activity_email_register">Register with Email</string>
+    <string name="title_activity_customer_main">CustomerMainActivity</string>
 </resources>
