@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/linear_email_reg"
     tools:context="me.srichomthong.savetogether.center.EmailRegisterActivity">
 
     <!-- Login progress -->
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/email_reg_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
@@ -77,10 +78,10 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/re_password"
+                    android:id="@+id/email_reg_re_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
+                    android:hint="@string/prompt_re_password"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_register"
                     android:imeOptions="actionUnspecified"

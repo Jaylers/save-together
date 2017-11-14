@@ -44,6 +44,7 @@
     <string name="app_message_language">language</string>
     <string name="app_message_sign_out">sign out</string>
     <string name="app_message_connecting">Connecting . .</string>
+    <string name="app_message_one_moment">One moment . .</string>
     <string name="app_message_signing_in">Signing in . .</string>
     <string name="app_message_verifying">Verifying . .</string>
     <string name="app_message_not_account_yet">No account yet?  <b><i>Create one</i></b></string>
@@ -53,11 +54,12 @@
     <string name="prompt_email">Email</string>
     <string name="app_message_password">Password</string>
     <string name="prompt_password">Password</string>
-    <string name="prompt_repassword">Confirm Password</string>
+    <string name="prompt_re_password">Confirm Password</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_re_password">Your password and confirmation password doesn\'t match.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
