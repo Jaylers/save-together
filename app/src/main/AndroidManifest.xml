@@ -20,7 +20,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FullscreenNoActionBar">
-
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -33,18 +32,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".customer.CustomerMainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_customer_main" />
-
+            android:label="@string/title_activity_customer_main"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".center.EmailSignInActivity"
-            android:screenOrientation="portrait"/>
-
+            android:label="@string/title_activity_sign_in"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".center.SignInActivity"
+            android:label="@string/title_activity_sign_in_selection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".center.EmailRegisterActivity"
+            android:label="@string/title_activity_email_register"
             android:screenOrientation="portrait"/>
     </application>
 

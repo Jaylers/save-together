@@ -30,6 +30,7 @@
 
     //Normal message
     <string name="app_message_back">Back</string>
+    <string name="app_message_next">Next</string>
     <string name="app_message_close">Close</string>
     <string name="app_message_retry">Retry</string>
     <string name="app_message_ok">OK</string>
@@ -45,13 +46,15 @@
     <string name="app_message_connecting">Connecting . .</string>
     <string name="app_message_signing_in">Signing in . .</string>
     <string name="app_message_verifying">Verifying . .</string>
+    <string name="app_message_not_account_yet">No account yet?  <b><i>Create one</i></b></string>
+    <string name="app_message_back_to_start">Select user type again</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="app_message_password">Password</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_repassword">Confirm Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -71,4 +74,8 @@
     <string name="customer_main_title_near_by">Near By</string>
     <string name="customer_main_title_save">Save</string>
     <string name="customer_main_title_profile">Profile</string>
+
+    <string name="title_activity_sign_in">Sign in</string>
+    <string name="title_activity_sign_in_selection">Sign in with Email</string>
+    <string name="title_activity_email_register">Register with Email</string>
 </resources>
