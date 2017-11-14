@@ -3,8 +3,6 @@ package me.srichomthong.savetogether.center;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -39,10 +37,10 @@ public class SignInActivity extends AppCompatActivity {
 
     private void whoImI(String userType){
         if (userType.equals(SharedFlag.flag_restaurant)){
-            text_title.setText(getString(R.string.auth_message_im_the_restaurant));
+            text_title.setText(getString(R.string.app_message_im_the_restaurant));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
         }else if (userType.equals(SharedFlag.flag_customer)){
-            text_title.setText(getString(R.string.auth_message_im_consumer));
+            text_title.setText(getString(R.string.app_message_im_consumer));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
         }else {
             Toast.makeText(getApplicationContext(),

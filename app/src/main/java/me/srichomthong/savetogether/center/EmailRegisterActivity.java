@@ -17,17 +17,24 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +44,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
 import me.srichomthong.savetogether.SplashActivity;
+import me.srichomthong.savetogether.center.model.User;
 import me.srichomthong.savetogether.utility.manager.ColorManager;
+import me.srichomthong.savetogether.utility.manager.DialogManager;
+import me.srichomthong.savetogether.utility.manager.ToastManager;
 import me.srichomthong.savetogether.utility.sharedpreference.SharedSignedUser;
+import me.srichomthong.savetogether.utility.sharedstring.FirebaseTag;
 import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -61,13 +72,18 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
             "foo@example.com:hello", "bar@example.com:world"
     };
 
+    private static final String TAG = "Email Register";
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private EditText mRePasswordView;
-    private View mLoginFormView;
+    @BindView(R.id.email_reg_email) AutoCompleteTextView mEmailView;
+    @BindView(R.id.email_reg_password) EditText mPasswordView;
+    @BindView(R.id.email_reg_re_password) EditText mRePasswordView;
+    @BindView(R.id.email_reg_form) View mLoginFormView;
     private ColorManager colorManager;
     private SharedSignedUser sharedSignedUser;
+    private DialogManager dialogManager;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private ToastManager toastManager;
 
     @BindView(R.id.email_reg_title) TextView text_title;
     @BindView(R.id.linear_email_reg) LinearLayout background;
@@ -78,12 +94,18 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
         setContentView(R.layout.activity_email_register);
         ButterKnife.bind(this);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-        colorManager = new ColorManager();
+        declareClass();
+        whoImI(sharedSignedUser.getTypeOfUser());
+    }
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mRePasswordView = (EditText) findViewById(R.id.email_reg_re_password);
+    private void declareClass(){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        colorManager = new ColorManager();
+        sharedSignedUser = new SharedSignedUser(EmailRegisterActivity.this);
+        dialogManager = new DialogManager(EmailRegisterActivity.this);
+        toastManager = new ToastManager(EmailRegisterActivity.this);
         mRePasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -94,33 +116,21 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
                 return false;
             }
         });
-
-
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-        mLoginFormView = findViewById(R.id.login_form);
-
-        colorManager = new ColorManager();
-        sharedSignedUser = new SharedSignedUser(EmailRegisterActivity.this);
-        whoImI(sharedSignedUser.getTypeOfUser());
     }
 
     private void whoImI(String userType){
         if (userType.equals(SharedFlag.flag_restaurant)){
-            text_title.setText(getString(R.string.auth_message_im_the_restaurant));
+            text_title.setText(getString(R.string.app_message_im_the_restaurant));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
         }else if (userType.equals(SharedFlag.flag_customer)){
-            text_title.setText(getString(R.string.auth_message_im_consumer));
+            text_title.setText(getString(R.string.app_message_im_consumer));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
         }
     }
 
+    @OnClick(R.id.email_sign_in_button) public void onRegister(){
+        attemptLogin();
+    }
     @OnClick(R.id.email_reg_selection) public void onReSelection(){
         Intent intent = new Intent(EmailRegisterActivity.this, SplashActivity.class);
         startActivity(intent);
@@ -136,6 +146,46 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
         Intent intent = new Intent(EmailRegisterActivity.this, EmailSignInActivity.class);
         startActivity(intent);
         this.finish();
+    }
+
+    private void signUp() {
+        Log.d(TAG, getString(R.string.app_message_sign_up));
+        dialogManager.displayLoading();
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
+                        dialogManager.dismissDisplay();
+
+                        if (task.isSuccessful()) {
+                            onAuthSuccess(task.getResult().getUser());
+                            toastManager.displayError(getString(R.string.app_message_sign_up_success));
+                        } else {
+                            toastManager.displayError(task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+    private void onAuthSuccess(FirebaseUser user) {
+        // Write new user
+        writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), user.getPhoneNumber()
+                ,user.getProviderId());
+        // Go to MainActivity
+        startActivity(new Intent(EmailRegisterActivity.this, SignInActivity.class));
+        finish();
+    }
+
+    private void writeNewUser(String id, String email, String name, String phone, String provider) {
+        String type = sharedSignedUser.getTypeOfUser();
+        if (type.equals(SharedFlag.flag_unknown)){
+            type = SharedFlag.flag_customer;
+        }
+        User user = new User( id, "", email, name, phone, "", provider, "", type);
+        mDatabase.child(FirebaseTag.users).child(id).setValue(user);
     }
 
     private void populateAutoComplete() {
@@ -182,11 +232,6 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
         // Reset errors.
         mEmailView.setError(null);
@@ -200,28 +245,29 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
         boolean cancel = false;
         View focusView = null;
 
-        if (!(password.equals(password))){
+
+        // Check for a valid password, if the user entered one.
+        if (password.isEmpty()){
+            mPasswordView.setError(getString(R.string.err_message_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }else if (!isPasswordValid(password)){
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }else if (rePassword.isEmpty()){
+            mRePasswordView.setError(getString(R.string.err_message_required));
+            focusView = mRePasswordView;
+            cancel = true;
+        }else if (!password.equals(rePassword)){
             mRePasswordView.setError(getString(R.string.error_invalid_re_password));
             focusView = mRePasswordView;
             cancel = true;
         }
 
-        if (!TextUtils.isEmpty(rePassword) && !isPasswordValid(rePassword)) {
-            mRePasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mRePasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
+        if (email.isEmpty()) {
+            mEmailView.setError(getString(R.string.err_message_required));
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
@@ -233,7 +279,7 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
         if (cancel) {
             focusView.requestFocus();
         } else {
-            //do reg here
+            signUp();
         }
     }
 
@@ -242,8 +288,7 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 7;
     }
 
 

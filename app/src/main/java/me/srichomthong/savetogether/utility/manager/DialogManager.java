@@ -27,8 +27,7 @@ public class DialogManager {
         dialog = new ACProgressFlower.Builder(activity)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
-                .text(activity.getString(R.string.app_message_one_moment))
-                        .fadeColor(Color.DKGRAY).build();
+                .fadeColor(Color.CYAN).build();
         dialog.show();
     }
 
@@ -36,7 +35,9 @@ public class DialogManager {
         ACProgressFlower dialog = new ACProgressFlower.Builder(activity)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
-                .text(message).fadeColor(Color.DKGRAY).build();
+                .text(message)
+                .textSize(15)
+                .fadeColor(Color.DKGRAY).build();
         dialog.show();
     }
 

@@ -104,7 +104,6 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
 
         mLoginFormView = findViewById(R.id.email_login_form);
         mProgressView = findViewById(R.id.login_progress);
-
         colorManager = new ColorManager();
         sharedSignedUser = new SharedSignedUser(EmailSignInActivity.this);
         whoImI(sharedSignedUser.getTypeOfUser());
@@ -112,10 +111,10 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
 
     private void whoImI(String userType){
         if (userType.equals(SharedFlag.flag_restaurant)){
-            text_title.setText(getString(R.string.auth_message_im_the_restaurant));
+            text_title.setText(getString(R.string.app_message_im_the_restaurant));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
         }else if (userType.equals(SharedFlag.flag_customer)){
-            text_title.setText(getString(R.string.auth_message_im_consumer));
+            text_title.setText(getString(R.string.app_message_im_consumer));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
         }
     }
@@ -194,7 +193,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
+            mEmailView.setError(getString(R.string.err_message_required));
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
