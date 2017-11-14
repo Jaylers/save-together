@@ -16,7 +16,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,7 +25,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -120,10 +118,10 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
 
     private void whoImI(String userType){
         if (userType.equals(SharedFlag.flag_restaurant)){
-            text_title.setText(getString(R.string.app_message_im_the_restaurant));
+            text_title.setText(getString(R.string.app_message_im_the_restaurant_double_line));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
         }else if (userType.equals(SharedFlag.flag_customer)){
-            text_title.setText(getString(R.string.app_message_im_consumer));
+            text_title.setText(getString(R.string.app_message_im_consumer_double_line));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
         }
     }

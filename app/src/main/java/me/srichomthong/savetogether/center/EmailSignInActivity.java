@@ -111,10 +111,10 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
 
     private void whoImI(String userType){
         if (userType.equals(SharedFlag.flag_restaurant)){
-            text_title.setText(getString(R.string.app_message_im_the_restaurant));
+            text_title.setText(getString(R.string.app_message_im_the_restaurant_double_line));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_restaurant_color_theme)));
         }else if (userType.equals(SharedFlag.flag_customer)){
-            text_title.setText(getString(R.string.app_message_im_consumer));
+            text_title.setText(getString(R.string.app_message_im_consumer_double_line));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(SharedFlag.flag_customer_color_theme)));
         }
     }
