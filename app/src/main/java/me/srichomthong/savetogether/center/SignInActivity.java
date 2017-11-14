@@ -7,6 +7,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +20,9 @@ import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
 public class SignInActivity extends AppCompatActivity {
 
-    ColorManager colorManager;
-    SharedFlag sharedFlag;
+    private ColorManager colorManager;
+    private SharedSignedUser sharedSignedUser;
+    private SharedFlag sharedFlag;
     @BindView(R.id.sign_in_txt_title) TextView text_title;
     @BindView(R.id.sign_in_container) ConstraintLayout background;
 
@@ -31,18 +33,20 @@ public class SignInActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         colorManager = new ColorManager();
         sharedFlag = new SharedFlag();
-        whoImI();
+        sharedSignedUser = new SharedSignedUser(SignInActivity.this);
+        whoImI(sharedSignedUser.getTypeOfUser());
     }
 
-    private void whoImI(){
-        SharedSignedUser sharedSignedUser = new SharedSignedUser(SignInActivity.this);
-        if (sharedSignedUser.getTypeOfUser() == SharedFlag.flag_customer){
-            text_title.setText(getString(R.string.auth_message_im_consumer));
-            background.setBackground(colorManager.getColorDrawable(colorManager.parser(sharedFlag.flag_customer_color_theme)));
-        }else if (sharedSignedUser.getTypeOfUser() == SharedFlag.flag_restaurant){
+    private void whoImI(String userType){
+        if (userType.equals(SharedFlag.flag_restaurant)){
             text_title.setText(getString(R.string.auth_message_im_the_restaurant));
             background.setBackground(colorManager.getColorDrawable(colorManager.parser(sharedFlag.flag_restaurant_color_theme)));
+        }else if (userType.equals(SharedFlag.flag_customer)){
+            text_title.setText(getString(R.string.auth_message_im_consumer));
+            background.setBackground(colorManager.getColorDrawable(colorManager.parser(sharedFlag.flag_customer_color_theme)));
         }else {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.err_unknown_error), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignInActivity.this, SplashActivity.class);
             startActivity(intent);
             this.finish();

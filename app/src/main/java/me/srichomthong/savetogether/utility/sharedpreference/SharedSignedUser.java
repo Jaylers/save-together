@@ -29,6 +29,6 @@ public class SharedSignedUser {
     }
 
     public String getTypeOfUser(){
-        return account.getString(SharedKey.key_user_type,SharedFlag.flag_unknown);
+        return account.getString(SharedKey.key_user_type, SharedFlag.flag_unknown);
     }
 }

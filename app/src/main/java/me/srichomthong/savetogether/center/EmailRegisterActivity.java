@@ -36,18 +36,24 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
+import me.srichomthong.savetogether.SplashActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class EmailSignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class EmailRegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+
+    /**
+     * A dummy authentication store containing known user names and passwords.
+     * TODO: remove after connecting to a real authentication system.
+     */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
@@ -65,7 +71,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth_email_sign_in);
+        setContentView(R.layout.activity_email_register);
         ButterKnife.bind(this);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -91,8 +97,25 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        mLoginFormView = findViewById(R.id.email_login_form);
+        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    @OnClick(R.id.email_reg_selection) public void onReSelection(){
+        Intent intent = new Intent(EmailRegisterActivity.this, SplashActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
+    @OnClick(R.id.email_reg_back) public void onBack(){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(EmailRegisterActivity.this, EmailSignInActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     private void populateAutoComplete() {
@@ -192,11 +215,13 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
     }
 
     private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 7;
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
     }
 
     /**
@@ -204,6 +229,9 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -225,6 +253,8 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
                 }
             });
         } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
@@ -267,7 +297,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(EmailSignInActivity.this,
+                new ArrayAdapter<>(EmailRegisterActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -284,23 +314,10 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         int IS_PRIMARY = 1;
     }
 
-    @OnClick(R.id.email_reg_text_btn) public void onRegister(){
-        Intent intent = new Intent(EmailSignInActivity.this, EmailRegisterActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
-
-    @OnClick(R.id.txt_email_sign_in_back) public void onBack(){
-        onBackPressed();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(EmailSignInActivity.this, SignInActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
-
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -313,6 +330,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
@@ -328,6 +346,8 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
                     return pieces[1].equals(mPassword);
                 }
             }
+
+            // TODO: register the new account here.
             return true;
         }
 
@@ -349,7 +369,6 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
             mAuthTask = null;
             showProgress(false);
         }
-
     }
 }
 

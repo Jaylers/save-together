@@ -96,7 +96,7 @@ public class SplashActivity extends AppCompatActivity {
                     mControlsView.setVisibility(View.VISIBLE);
                 }
             }
-        },2000);
+        },1500);
     }
 
     private void userVerify(){

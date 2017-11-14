@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
@@ -38,27 +40,28 @@ public class SelectionAuthFragment extends Fragment {
         ButterKnife.bind(this, view);
         activity = getActivity();
         sharedSignedUser = new SharedSignedUser(activity);
+        sharedSignedUser.setTypeOfUser(SharedFlag.flag_customer);
+
         return  view;
     }
 
-    @OnClick(R.id.img_customer) public void imgConsumer(){
-        customerSignIn();
-    }
-
     @OnClick(R.id.img_restaurant) public void imgRestaurant(){
+        sharedSignedUser.setTypeOfUser(SharedFlag.flag_restaurant);
         restaurantSignIn();
     }
 
+    @OnClick(R.id.img_customer) public void imgConsumer(){
+        sharedSignedUser.setTypeOfUser(SharedFlag.flag_customer);
+        customerSignIn();
+    }
 
     private void customerSignIn(){
-        sharedSignedUser.setTypeOfUser(SharedFlag.flag_customer);
         Intent intent = new Intent(activity, SignInActivity.class);
         startActivity(intent);
         activity.finish();
     }
 
     private void restaurantSignIn(){
-        sharedSignedUser.setTypeOfUser(SharedFlag.flag_restaurant);
         Intent intent = new Intent(activity, SignInActivity.class);
         startActivity(intent);
         activity.finish();
