@@ -1,5 +1,6 @@
 package me.srichomthong.savetogether.center;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
@@ -63,7 +64,9 @@ public class SignInActivity extends AppCompatActivity {
 
     @OnClick(R.id.img_email_sign_in) public void OnEmailSignIn(){
         Intent intent = new Intent(SignInActivity.this ,EmailSignInActivity.class);
-        startActivity(intent);
+        ActivityOptions options =
+                ActivityOptions.makeCustomAnimation(SignInActivity.this, R.anim.fade_in, R.anim.fade_out);
+        startActivity(intent, options.toBundle());
         this.finish();
     }
 
@@ -76,7 +79,9 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(SignInActivity.this, SplashActivity.class);
-        startActivity(intent);
+        ActivityOptions options =
+                ActivityOptions.makeCustomAnimation(SignInActivity.this, R.anim.fade_in_smooth, R.anim.fade_out);
+        startActivity(intent, options.toBundle());
         this.finish();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////

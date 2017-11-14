@@ -46,22 +46,15 @@ public class SelectionAuthFragment extends Fragment {
     }
 
     @OnClick(R.id.img_restaurant) public void imgRestaurant(){
-        sharedSignedUser.setTypeOfUser(SharedFlag.flag_restaurant);
-        restaurantSignIn();
+        SignIn(SharedFlag.flag_restaurant);
     }
 
     @OnClick(R.id.img_customer) public void imgConsumer(){
-        sharedSignedUser.setTypeOfUser(SharedFlag.flag_customer);
-        customerSignIn();
+        SignIn(SharedFlag.flag_customer);
     }
 
-    private void customerSignIn(){
-        Intent intent = new Intent(activity, SignInActivity.class);
-        startActivity(intent);
-        activity.finish();
-    }
-
-    private void restaurantSignIn(){
+    private void SignIn(String flag){
+        sharedSignedUser.setTypeOfUser(flag);
         Intent intent = new Intent(activity, SignInActivity.class);
         startActivity(intent);
         activity.finish();

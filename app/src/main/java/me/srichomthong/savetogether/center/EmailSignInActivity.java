@@ -3,6 +3,7 @@ package me.srichomthong.savetogether.center;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -297,7 +298,9 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(EmailSignInActivity.this, SignInActivity.class);
-        startActivity(intent);
+        ActivityOptions options =
+                ActivityOptions.makeCustomAnimation(EmailSignInActivity.this, R.anim.fade_in_smooth, R.anim.fade_out);
+        startActivity(intent, options.toBundle());
         this.finish();
     }
 

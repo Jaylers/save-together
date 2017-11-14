@@ -167,7 +167,7 @@ public class SplashActivity extends AppCompatActivity {
         SelectionAuthFragment selectionAuthFragment = new SelectionAuthFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in,
+        ft.setCustomAnimations(R.anim.fade_in_smooth,
                 R.anim.fade_out);
         ft.replace(R.id.frame_fragment_base_auth, selectionAuthFragment);
         ft.commit();
