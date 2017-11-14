@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/app_message_im_the_restaurant"
+                android:text="@string/app_message_im_the_restaurant_double_line"
                 android:textColor="@color/color_restaurant_text"
                 android:textAlignment="center"
                 android:textSize="20sp"
@@ -89,7 +89,7 @@
                     android:textColor="@color/color_customer_text"
                     android:textAlignment="center"
                     android:textSize="20sp"
-                    android:text="@string/app_message_im_consumer"/>
+                    android:text="@string/app_message_im_consumer_double_line"/>
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

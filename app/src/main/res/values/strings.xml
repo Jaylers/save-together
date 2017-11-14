@@ -10,8 +10,10 @@
     <string name="app_message_user_gmail">User Gmail Account</string>
     <string name="app_message_username">Username</string>
     <string name="app_message_with_email">Sign up with email</string>
-    <string name="app_message_im_the_restaurant">I\'m the\nrestaurant</string>
-    <string name="app_message_im_consumer">I\'m\nconsumer</string>
+    <string name="app_message_im_the_restaurant">I\'m the restaurant</string>
+    <string name="app_message_im_consumer">I\'m consumer</string>
+    <string name="app_message_im_the_restaurant_double_line">I\'m the\nrestaurant</string>
+    <string name="app_message_im_consumer_double_line">I\'m\nconsumer</string>
     <string name="app_message_sign_up_success">Sign up successfully</string>
 
     //Error message
