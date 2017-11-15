@@ -23,7 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.srichomthong.savetogether.center.EmailSignInActivity;
 import me.srichomthong.savetogether.center.SelectionAuthFragment;
+import me.srichomthong.savetogether.customer.CustomerMainActivity;
 import me.srichomthong.savetogether.utility.manager.ConnectionsManager;
 
 public class SplashActivity extends AppCompatActivity {
@@ -124,7 +126,29 @@ public class SplashActivity extends AppCompatActivity {
         mControlsView_sign_out.startAnimation(animation);
         mControlsView_sign_out.setVisibility(View.VISIBLE);
         auth_message.setText(getString(R.string.app_message_signing_in));
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validateUserType();
+            }
+        },2000);
+    }
 
+    private void validateUserType(){
+        iAmCustomer();
+    }
+
+    private void iAmCustomer(){
+        Intent intent = new Intent(SplashActivity.this, CustomerMainActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
+    private void iAmRestaurant(){
+        Intent intent = new Intent(SplashActivity.this, CustomerMainActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     @OnClick(R.id.splash_btn_retry) public void onRetry(){

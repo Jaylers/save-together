@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +45,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
+import me.srichomthong.savetogether.customer.CustomerMainActivity;
 import me.srichomthong.savetogether.utility.manager.ColorManager;
+import me.srichomthong.savetogether.utility.manager.DialogManager;
+import me.srichomthong.savetogether.utility.manager.ToastManager;
 import me.srichomthong.savetogether.utility.sharedpreference.SharedSignedUser;
 import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
@@ -57,32 +66,25 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private ColorManager colorManager;
     private SharedSignedUser sharedSignedUser;
+    private DialogManager dialogManager;
+    private FirebaseAuth firebaseAuth;
 
     @BindView(R.id.email_sign_title) TextView text_title;
     @BindView(R.id.linear_email_sign_in) LinearLayout background;
+    @BindView(R.id.email_sign_in_email) AutoCompleteTextView mEmailView;
+    @BindView(R.id.email_sign_in_password) EditText mPasswordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_email_sign_in);
         ButterKnife.bind(this);
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -94,18 +96,9 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.email_login_form);
-        mProgressView = findViewById(R.id.login_progress);
         colorManager = new ColorManager();
         sharedSignedUser = new SharedSignedUser(EmailSignInActivity.this);
+        dialogManager = new DialogManager(EmailSignInActivity.this);
         whoImI(sharedSignedUser.getTypeOfUser());
     }
 
@@ -119,6 +112,53 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         }
     }
 
+    @OnClick(R.id.email_sign_in_button) public void onSignIn(){
+        attemptLogin();
+    }
+
+    @OnClick(R.id.email_reg_text_btn) public void onRegister(){
+        Intent intent = new Intent(EmailSignInActivity.this, EmailRegisterActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
+    @OnClick(R.id.txt_email_sign_in_back) public void onBack(){
+        onBackPressed();
+    }
+
+    private void signIn(String email, String password){
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                dialogManager.dismissDisplay();
+                if (task.isSuccessful()){
+                    whoAmI();
+                }else {
+                    ToastManager toastManager = new ToastManager(EmailSignInActivity.this);
+                    toastManager.displayError(task.getException().getMessage());
+                }
+            }
+        });
+    }
+
+    private void whoAmI(){
+        // by pass
+        iAmCustomer();
+    }
+
+    private void iAmCustomer(){
+        Intent intent = new Intent(EmailSignInActivity.this, CustomerMainActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
+    private void iAmRestaurant(){
+        Intent intent = new Intent(EmailSignInActivity.this, CustomerMainActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -127,51 +167,16 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         getLoaderManager().initLoader(0, null, this);
     }
 
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
+    public void onBackPressed() {
+        Intent intent = new Intent(EmailSignInActivity.this, SignInActivity.class);
+        ActivityOptions options =
+                ActivityOptions.makeCustomAnimation(EmailSignInActivity.this, R.anim.fade_in_smooth, R.anim.fade_out);
+        startActivity(intent, options.toBundle());
+        this.finish();
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -209,9 +214,9 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            dialogManager.displayLoading();
+            //do sign in
+            signIn(email, password);
         }
     }
 
@@ -223,36 +228,7 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         return password.length() > 7;
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
+    //////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -297,7 +273,6 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         mEmailView.setAdapter(adapter);
     }
 
-
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -305,77 +280,41 @@ public class EmailSignInActivity extends AppCompatActivity implements LoaderCall
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
     }
 
-    @OnClick(R.id.email_reg_text_btn) public void onRegister(){
-        Intent intent = new Intent(EmailSignInActivity.this, EmailRegisterActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
-
-    @OnClick(R.id.txt_email_sign_in_back) public void onBack(){
-        onBackPressed();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(EmailSignInActivity.this, SignInActivity.class);
-        ActivityOptions options =
-                ActivityOptions.makeCustomAnimation(EmailSignInActivity.this, R.anim.fade_in_smooth, R.anim.fade_out);
-        startActivity(intent, options.toBundle());
-        this.finish();
-    }
-
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+    private boolean mayRequestContacts() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
+        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                        @Override
+                        @TargetApi(Build.VERSION_CODES.M)
+                        public void onClick(View v) {
+                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+                        }
+                    });
+        } else {
+            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+        }
+        return false;
+    }
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+    /**
+     * Callback received when a permissions request has been completed.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_READ_CONTACTS) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                populateAutoComplete();
             }
         }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-
     }
 }
 
