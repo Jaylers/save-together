@@ -3,8 +3,9 @@
     <string name="app_name_double_line">Save\nTogether</string>
     <string name="team_name">Save Yours World</string>
 
-    <string name="facebook_app_id">463835870676974</string>
+    <string name="facebook_application_id">463835870676974</string>
     <string name="fb_login_protocol_scheme">fb463835870676974</string>
+    <string name="facebook_redirect_link">https://save-together.firebaseapp.com/__/auth/handler</string>
 
     //Auth
     <string name="app_message_user_gmail">User Gmail Account</string>
@@ -15,6 +16,12 @@
     <string name="app_message_im_the_restaurant_double_line">I\'m the\nrestaurant</string>
     <string name="app_message_im_consumer_double_line">I\'m\nconsumer</string>
     <string name="app_message_sign_up_success">Sign up successfully</string>
+    <string name="app_message_phone_number">Phone number</string>
+    <string name="app_message_verify_code">Verify code</string>
+    <string name="app_message_send">Send</string>
+    <string name="app_message_re_send">Re Send</string>
+    <string name="app_message_verify">Verify</string>
+    <string name="app_message_welcome">Welcome </string>
 
     //Error message
     <string name="err_message_required">Required</string>
@@ -23,6 +30,9 @@
     <string name="err_unknown_error">Something wrong! That\'s all we know.</string>
     <string name="err_connection_error">Connection error</string>
     <string name="err_sign_up_failure">Something wrong, Sign up failure</string>
+    <string name="err_invalid_phone_code">Invalid code!</string>
+    <string name="err_invalid_phone_number">Invalid phone number.</string>
+    <string name="err_phone_sign_up_quota_exceeded">The quota of sign up with phone number is exceeded. Please continue with orther way or try again on next day.</string>
 
     //Dangerous
     <string name="app_message_request_permission_call">Please allow us to make a Call</string>
@@ -71,14 +81,21 @@
     <string name="language_thailand"> ภาษาไทย</string>
     <string name="language_english"> English</string>
 
-    <string name="customer_main_title_home">Home</string>
-    <string name="customer_main_title_review">Review</string>
-    <string name="customer_main_title_near_by">Near By</string>
-    <string name="customer_main_title_save">Save</string>
-    <string name="customer_main_title_profile">Profile</string>
+    <string name="main_title_home">Home</string>
+    <string name="main_title_review">Review</string>
+    <string name="main_title_near_by">Near By</string>
+    <string name="main_title_favorite">Favorite</string>
+    <string name="main_title_profile">Profile</string>
+    <string name="main_title_sale">Sale</string>
+    <string name="main_title_history">History</string>
 
     <string name="title_activity_sign_in">Sign in</string>
     <string name="title_activity_sign_in_selection">Sign in with Email</string>
     <string name="title_activity_email_register">Register with Email</string>
+    <string name="title_activity_phone_sign_in">Continue with Phone number</string>
     <string name="title_activity_customer_main">CustomerMainActivity</string>
+    <string name="title_activity_restaurant_main">RestaurantMainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

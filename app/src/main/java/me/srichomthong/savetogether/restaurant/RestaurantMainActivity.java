@@ -1,4 +1,4 @@
-package me.srichomthong.savetogether.customer;
+package me.srichomthong.savetogether.restaurant;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import me.srichomthong.savetogether.R;
 
-public class CustomerMainActivity extends AppCompatActivity {
+public class RestaurantMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -19,25 +19,20 @@ public class CustomerMainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.cus_navigation_home:
-                    mTextMessage.setText(R.string.main_title_home);
-                    home();
+                case R.id.res_navigation_home:
+                    mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.cus_navigation_review:
+                case R.id.res_navigation_review:
                     mTextMessage.setText(R.string.main_title_review);
-                    review();
                     return true;
-                case R.id.cus_navigation_near_by:
-                    mTextMessage.setText(R.string.main_title_near_by);
-                    nearBy();
+                case R.id.res_navigation_my_sale:
+                    mTextMessage.setText(R.string.main_title_sale);
                     return true;
-                case R.id.cus_navigation_favorite:
-                    mTextMessage.setText(R.string.main_title_favorite);
-                    favorite();
+                case R.id.res_navigation_history:
+                    mTextMessage.setText(R.string.main_title_history);
                     return true;
-                case R.id.cus_navigation_profile:
+                case R.id.res_navigation_profile:
                     mTextMessage.setText(R.string.main_title_profile);
-                    profile();
                     return true;
             }
             return false;
@@ -47,31 +42,11 @@ public class CustomerMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_main);
+        setContentView(R.layout.activity_restaurant_main);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
-    private void home(){
-
-    }
-
-    private void review(){
-
-    }
-
-    private void nearBy(){
-
-    }
-
-    private void favorite(){
-
-    }
-
-    private void profile(){
-
     }
 
 }

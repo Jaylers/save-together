@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "194709092460-pik3071ocr3ui1fafii4g8pf7i6nebf3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.srichomthong.savetogether",
+            "certificate_hash": "4d05fb42f3f03fc40169a7a195076e22fb3c864c"
+          }
+        },
+        {
           "client_id": "194709092460-bckee03ob5vtu1dip3iqv3aef2oadt6o.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194709092460-bckee03ob5vtu1dip3iqv3aef2oadt6o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

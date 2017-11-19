@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,14 +20,26 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.srichomthong.savetogether.center.AppSignatureHelper;
 import me.srichomthong.savetogether.center.EmailSignInActivity;
 import me.srichomthong.savetogether.center.SelectionAuthFragment;
+import me.srichomthong.savetogether.center.model.User;
 import me.srichomthong.savetogether.customer.CustomerMainActivity;
+import me.srichomthong.savetogether.restaurant.RestaurantMainActivity;
 import me.srichomthong.savetogether.utility.manager.ConnectionsManager;
+import me.srichomthong.savetogether.utility.manager.ToastManager;
+import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
 public class SplashActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
@@ -69,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
     //////////////////////////////////////////////////////////////////////////
 
     @BindView(R.id.txt_auth_message) TextView auth_message;
-    ConnectionsManager connection;
+    private ConnectionsManager connection;
     private FirebaseAuth mAuth;
     @BindView(R.id.splash_progressBar) ProgressBar progressBar;
 
@@ -105,7 +118,7 @@ public class SplashActivity extends AppCompatActivity {
                     mControlsView.setVisibility(View.VISIBLE);
                 }
             }
-        },2000);
+        },1000);
     }
 
     private FirebaseUser currentUser;
@@ -126,17 +139,31 @@ public class SplashActivity extends AppCompatActivity {
         mControlsView_sign_out.startAnimation(animation);
         mControlsView_sign_out.setVisibility(View.VISIBLE);
         auth_message.setText(getString(R.string.app_message_signing_in));
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                validateUserType();
-            }
-        },2000);
+        validateUserType();
     }
 
     private void validateUserType(){
-        iAmCustomer();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("users/".concat(currentUser.getUid()));
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user.getType().equals(SharedFlag.flag_customer)){
+                    iAmCustomer();
+                }else {
+                    iAmRestaurant();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                String message = String.valueOf(databaseError.getCode()).concat(" ".concat(databaseError.getMessage()));
+                Log.e("Error", message);
+                mAuth.signOut();
+                openBaseAuth();
+            }
+        });
     }
 
     private void iAmCustomer(){
@@ -146,7 +173,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void iAmRestaurant(){
-        Intent intent = new Intent(SplashActivity.this, CustomerMainActivity.class);
+        Intent intent = new Intent(SplashActivity.this, RestaurantMainActivity.class);
         startActivity(intent);
         this.finish();
     }
@@ -189,7 +216,7 @@ public class SplashActivity extends AppCompatActivity {
         mControlsView.setVisibility(View.GONE);
         mVisible = false;
 
-        // Schedule a runnable to remove the status and navigation bar after a delay
+        // Schedule a runnable to remove the status and cus_navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }

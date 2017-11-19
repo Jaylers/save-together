@@ -2,11 +2,20 @@ package me.srichomthong.savetogether.center;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +26,8 @@ import me.srichomthong.savetogether.utility.manager.ColorManager;
 import me.srichomthong.savetogether.utility.sharedpreference.SharedSignedUser;
 import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener{
 
     private ColorManager colorManager;
     private SharedSignedUser sharedSignedUser;
@@ -27,12 +37,17 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth_base_sign_in);
+        setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
 
         colorManager = new ColorManager();
         sharedSignedUser = new SharedSignedUser(SignInActivity.this);
         whoImI(sharedSignedUser.getTypeOfUser());
+        configureSignIn();
+    }
+
+    public void configureSignIn(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
     }
 
     private void whoImI(String userType){
@@ -51,12 +66,26 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     @OnClick(R.id.img_google_sign_in) public void onGoogleSignIn(){
 
     }
 
-    @OnClick(R.id.img_facebook_sign_in) public void onFacebookSignIn(){
+    @MainThread
+    private void handleSignInResponse(int resultCode, Intent data) {
 
+
+        //showSnackbar(R.string.unknown_sign_in_response);
+    }
+
+    @OnClick(R.id.img_facebook_sign_in) public void onFacebookSignIn(){
+        Intent intent = new Intent(SignInActivity.this, PhoneSignInActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     @OnClick(R.id.img_email_sign_in) public void OnEmailSignIn(){
@@ -81,5 +110,11 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(intent, options.toBundle());
         this.finish();
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////
 }

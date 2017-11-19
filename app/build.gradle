@@ -8,6 +8,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        resConfigs "auto"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -31,6 +32,8 @@ def ui = dependencyGroup {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
+    compile 'com.github.santalu:emptyview:1.0.3'
+    compile 'com.afollestad.material-dialogs:core:0.9.5.0'
 }
 
 def google = dependencyGroup {
@@ -38,6 +41,7 @@ def google = dependencyGroup {
 }
 
 def firebase = dependencyGroup {
+    implementation 'com.google.firebase:firebase-core:11.6.0'
     compile 'com.google.firebase:firebase-core:11.6.0'
     compile 'com.google.firebase:firebase-auth:11.6.0'
     compile 'com.google.firebase:firebase-database:11.6.0'
@@ -45,6 +49,10 @@ def firebase = dependencyGroup {
     compile 'com.google.firebase:firebase-crash:11.6.0'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
     compile 'com.google.firebase:firebase-invites:11.6.0'
+}
+
+def facebook = dependencyGroup {
+    compile('com.facebook.android:facebook-android-sdk:4.27.0')
 }
 
 def injection = dependencyGroup {
@@ -59,6 +67,7 @@ def image = dependencyGroup {
 def dialog = dependencyGroup {
     compile 'cc.cloudist.acplibrary:library:1.2.1'
     compile 'com.github.Shashank02051997:FancyToast-Android:0.1.3'
+    compile 'cn.pedant.sweetalert:library:1.3'
 }
 
 def test = dependencyGroup {
@@ -73,13 +82,19 @@ def annotation = dependencyGroup {
 }
 
 dependencies {
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     ui()
     injection()
     firebase()
+    facebook()
+    google()
     image()
     dialog()
     test()
     annotation()
 }
+
+
 
 apply plugin: 'com.google.gms.google-services'

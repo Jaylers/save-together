@@ -1,0 +1,145 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/linear_phone_sign_in"
+    tools:context="me.srichomthong.savetogether.center.PhoneSignInActivity">
+
+    <RelativeLayout
+        android:id="@+id/phone_login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/phone_sign_app_logo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_logo" />
+
+        <TextView
+            android:id="@+id/phone_sign_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_sign_app_logo"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/app_message_im_consumer"
+            android:textSize="25sp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_sign_title">
+
+            <AutoCompleteTextView
+                android:id="@+id/phone_sign_in_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:hint="@string/app_message_phone_number"
+                android:inputType="phone"
+                android:padding="8dp"
+                android:maxLines="1"
+                style="@style/button_round_style"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilphone">
+
+            <EditText
+                android:id="@+id/phone_sign_in_verify_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:hint="@string/app_message_verify_code"
+                android:imeActionId="6"
+                android:imeActionLabel="string/app_message_ok"
+                android:imeOptions="actionUnspecified"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:clickable="false"
+                style="@style/button_round_style"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/phone_send_form"
+            android:layout_below="@+id/til_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/phone_send_btn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/til_phone"
+                android:layout_marginEnd="2dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:text="@string/app_message_send"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/phone_re_send_btn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/til_phone"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:text="@string/app_message_re_send"
+                android:clickable="false"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/phone_sign_in_btn"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_below="@+id/phone_send_form"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:text="@string/app_message_sign_in"
+            android:clickable="false"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_phone_sign_in_back"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:padding="10dp"
+            android:text="@string/app_message_back"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</LinearLayout>

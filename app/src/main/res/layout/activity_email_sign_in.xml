@@ -49,6 +49,7 @@
                 android:layout_marginStart="50dp"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
+                style="@style/button_round_style"
                 android:maxLines="1"
                 android:singleLine="true" />
 
@@ -70,6 +71,7 @@
                 android:imeActionId="6"
                 android:imeActionLabel="@string/app_message_sign_in"
                 android:imeOptions="actionUnspecified"
+                style="@style/button_round_style"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />

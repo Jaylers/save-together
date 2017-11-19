@@ -15,7 +15,7 @@ import me.srichomthong.savetogether.R;
 public class DialogManager {
     private Context ctx;
     private Activity activity;
-    private String TAG = "Toast : ";
+    private String TAG = "Dialog : ";
     ACProgressFlower dialog;
 
     public DialogManager(Context ctx) {
@@ -46,6 +46,8 @@ public class DialogManager {
     }
 
     public void dismissDisplay(){
-        dialog.dismiss();
+        if (dialog.isShowing()){
+            dialog.dismiss();
+        }
     }
 }
