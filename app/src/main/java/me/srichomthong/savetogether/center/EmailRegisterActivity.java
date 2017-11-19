@@ -43,6 +43,7 @@ import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
 import me.srichomthong.savetogether.SplashActivity;
 import me.srichomthong.savetogether.center.model.User;
+import me.srichomthong.savetogether.utility.manager.AccountManager;
 import me.srichomthong.savetogether.utility.manager.ColorManager;
 import me.srichomthong.savetogether.utility.manager.DialogManager;
 import me.srichomthong.savetogether.utility.manager.ToastManager;
@@ -170,8 +171,8 @@ public class EmailRegisterActivity extends AppCompatActivity implements LoaderCa
 
     private void onAuthSuccess(FirebaseUser user) {
         // Write new user
-        writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), user.getPhoneNumber()
-                ,user.getProviderId());
+        AccountManager accountManager = new AccountManager(this);
+        accountManager.writeUser(user);
         // Go to MainActivity
         startActivity(new Intent(EmailRegisterActivity.this, SignInActivity.class));
         finish();

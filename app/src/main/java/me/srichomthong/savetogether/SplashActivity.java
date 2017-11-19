@@ -37,6 +37,7 @@ import me.srichomthong.savetogether.center.SelectionAuthFragment;
 import me.srichomthong.savetogether.center.model.User;
 import me.srichomthong.savetogether.customer.CustomerMainActivity;
 import me.srichomthong.savetogether.restaurant.RestaurantMainActivity;
+import me.srichomthong.savetogether.utility.manager.AccountManager;
 import me.srichomthong.savetogether.utility.manager.ConnectionsManager;
 import me.srichomthong.savetogether.utility.manager.ToastManager;
 import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
@@ -149,7 +150,10 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if (user.getType().equals(SharedFlag.flag_customer)){
+                if (user == null){
+                    AccountManager accountManager = new AccountManager(SplashActivity.this);
+                    accountManager.signOut();
+                }else if (user.getType().equals(SharedFlag.flag_customer)){
                     iAmCustomer();
                 }else {
                     iAmRestaurant();

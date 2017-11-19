@@ -27,8 +27,10 @@
     <string name="err_message_required">Required</string>
     <string name="err_message_connection_failure">Network connection error \n Please check your connection</string>
     <string name="err_unknown">Unknown</string>
+    <string name="err_">Error</string>
     <string name="err_unknown_error">Something wrong! That\'s all we know.</string>
     <string name="err_connection_error">Connection error</string>
+    <string name="err_google_play_error">Google Play service error</string>
     <string name="err_sign_up_failure">Something wrong, Sign up failure</string>
     <string name="err_invalid_phone_code">Invalid code!</string>
     <string name="err_invalid_phone_number">Invalid phone number.</string>
