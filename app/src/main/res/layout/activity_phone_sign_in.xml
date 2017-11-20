@@ -51,6 +51,7 @@
                 android:inputType="phone"
                 android:padding="8dp"
                 android:maxLines="1"
+                android:imeOptions="actionDone"
                 style="@style/button_round_style"
                 android:singleLine="true" />
 
@@ -117,7 +118,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/phone_sign_in_btn"
+            android:id="@+id/phone_verify_btn"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -127,7 +128,7 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:text="@string/app_message_sign_in"
+            android:text="@string/app_message_verify"
             android:clickable="false"
             android:textStyle="bold" />
 

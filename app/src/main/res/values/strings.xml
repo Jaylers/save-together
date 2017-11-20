@@ -51,6 +51,7 @@
     <string name="app_message_cancel">Cancel</string>
     <string name="app_message_confirm_to_close_app">Press back again to close</string>
     <string name="app_message_dismiss">Dismiss</string>
+    <string name="app_message_message">Message</string>
     <string name="app_message_yes">Yes</string>
     <string name="app_message_no">No</string>
     <string name="app_message_call">Call</string>
@@ -62,6 +63,7 @@
     <string name="app_message_verifying">Verifying . .</string>
     <string name="app_message_not_account_yet">No account yet?  <b><i>Create one</i></b></string>
     <string name="app_message_back_to_start">Select user type again</string>
+    <string name="app_message_must_be_6">The verify code must be 6 digit.</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

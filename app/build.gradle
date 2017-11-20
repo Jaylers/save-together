@@ -52,7 +52,7 @@ def firebase = dependencyGroup {
 }
 
 def facebook = dependencyGroup {
-    compile('com.facebook.android:facebook-android-sdk:4.27.0')
+    //compile('com.facebook.android:facebook-android-sdk:4.27.0')
 }
 
 def injection = dependencyGroup {
