@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
-import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+
 import me.srichomthong.savetogether.R;
 
 /**

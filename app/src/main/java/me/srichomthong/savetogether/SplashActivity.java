@@ -140,7 +140,13 @@ public class SplashActivity extends AppCompatActivity {
         mControlsView_sign_out.startAnimation(animation);
         mControlsView_sign_out.setVisibility(View.VISIBLE);
         auth_message.setText(getString(R.string.app_message_signing_in));
-        validateUserType();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validateUserType();
+            }
+        }, 1000);
     }
 
     private void validateUserType(){

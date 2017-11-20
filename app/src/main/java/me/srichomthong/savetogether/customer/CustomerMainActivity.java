@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import me.srichomthong.savetogether.R;
+import me.srichomthong.savetogether.utility.manager.SweetDialogManager;
 
 public class CustomerMainActivity extends AppCompatActivity {
 
@@ -52,6 +53,9 @@ public class CustomerMainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        SweetDialogManager sweetDialogManager = new SweetDialogManager(CustomerMainActivity.this);
+        sweetDialogManager.sweetInfo("Welcome","I hope you enjoy with us.");
     }
 
     private void home(){
