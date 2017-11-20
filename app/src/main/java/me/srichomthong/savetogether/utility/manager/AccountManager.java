@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -41,18 +42,27 @@ public class AccountManager {
     }
 
     public void writeUser(FirebaseUser user){
+        String url;
+        if (user.getPhotoUrl() != null){
+            url = user.getPhotoUrl().toString();
+        }else url = "";
+
         User users = new User( user.getUid(), "", user.getEmail(), user.getDisplayName(),
-                user.getPhoneNumber(), "", user.getProviders().toString(), user.getPhotoUrl().toString()
+                user.getPhoneNumber(), "", user.getProviders().toString(), url
                 , sharedSignedUser.getTypeOfUser());
         mDatabase.child(FirebaseTag.users).child(user.getUid()).setValue(users);
+    }
+
+    public void writePhoneUser(PhoneAuthCredential credential, FirebaseUser mUser, String phone){
+        User users = new User(mUser.getUid(),"", "", "", phone, "",
+                credential.getProvider(), "", sharedSignedUser.getTypeOfUser());
+        mDatabase.child(FirebaseTag.users).child(mUser.getUid()).setValue(users);
     }
 
     public void signOut(){
         mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
-        Intent intent = new Intent(activity, SplashActivity.class);
-        activity.startActivity(intent);
-        activity.finish();
+        restartApp();
     }
 
     public void revokeAccess(GoogleApiClient mGoogleApiClient){
@@ -71,5 +81,11 @@ public class AccountManager {
                     }
                 }
         );
+    }
+
+    public void restartApp(){
+        Intent intent = new Intent(activity, SplashActivity.class);
+        activity.startActivity(intent);
+        activity.finish();
     }
 }
