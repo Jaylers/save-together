@@ -21,7 +21,7 @@ import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
 import me.srichomthong.savetogether.center.fragment.MenuFragment;
 import me.srichomthong.savetogether.center.fragment.SalesFragment;
-import me.srichomthong.savetogether.restaurant.fragment.HistoryFragment;
+import me.srichomthong.savetogether.restaurant.fragment.HistoryFragmentRes;
 
 public class RestaurantMainActivity extends AppCompatActivity {
 
@@ -63,7 +63,7 @@ public class RestaurantMainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        review();
+        sale();
     }
 
     @OnClick(R.id.fab_add_product)public void onAddProduct(){
@@ -80,7 +80,7 @@ public class RestaurantMainActivity extends AppCompatActivity {
         mPagerAdapter = null;
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[] {
-                    new HistoryFragment()
+                    new HistoryFragmentRes()
             };
             private final String[] mFragmentNames = new String[] {
                     getString(R.string.main_title_history),
@@ -99,13 +99,13 @@ public class RestaurantMainActivity extends AppCompatActivity {
             }
         };
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.reviewPager_container);
+        mViewPager = findViewById(R.id.reviewPager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.salePager_container);
+        mViewPager = findViewById(R.id.salePager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.menuPager_container);
+        mViewPager = findViewById(R.id.menuPager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.historyPager_container);
+        mViewPager = findViewById(R.id.historyPager_res_container);
         mViewPager.setVisibility(View.VISIBLE);
         mViewPager.setAdapter(mPagerAdapter);
         TabLayout tabLayout = findViewById(R.id.tabs_control);
@@ -135,13 +135,13 @@ public class RestaurantMainActivity extends AppCompatActivity {
             }
         };
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.reviewPager_container);
+        mViewPager = findViewById(R.id.reviewPager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.historyPager_container);
+        mViewPager = findViewById(R.id.historyPager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.menuPager_container);
+        mViewPager = findViewById(R.id.menuPager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.salePager_container);
+        mViewPager = findViewById(R.id.salePager_res_container);
         mViewPager.setVisibility(View.VISIBLE);
         mViewPager.setAdapter(mPagerAdapter);
         TabLayout tabLayout = findViewById(R.id.tabs_control);
@@ -171,9 +171,9 @@ public class RestaurantMainActivity extends AppCompatActivity {
             }
         };
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.salePager_container);
+        mViewPager = findViewById(R.id.salePager_res_container);
         mViewPager.setVisibility(View.GONE);
-        mViewPager = findViewById(R.id.menuPager_container);
+        mViewPager = findViewById(R.id.menuPager_res_container);
         mViewPager.setVisibility(View.VISIBLE);
         mViewPager.setAdapter(mPagerAdapter);
         TabLayout tabLayout = findViewById(R.id.tabs_control);

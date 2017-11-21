@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,14 +19,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import me.srichomthong.savetogether.R;
 import me.srichomthong.savetogether.center.model.Sale;
 import me.srichomthong.savetogether.center.viewholder.SaleViewHolder;
 import me.srichomthong.savetogether.utility.sharedstring.FirebaseTag;
 
-public abstract class SalesListFragment extends Fragment {
+public abstract class SalesCusListFragment extends Fragment {
 
     private static final String TAG = "ReviewListFragment";
 
@@ -39,19 +38,19 @@ public abstract class SalesListFragment extends Fragment {
     private LinearLayoutManager mManager;
     View rootView;
 
-    public SalesListFragment() {}
+    public SalesCusListFragment() {}
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        rootView = inflater.inflate(R.layout.fragment_res_sale, container, false);
+        rootView = inflater.inflate(R.layout.fragment_cus_sale, container, false);
 
         // [START create_database_reference]
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END create_database_reference]
 
-        mRecycler = rootView.findViewById(R.id.messages_list);
+        mRecycler = rootView.findViewById(R.id.messages_cus_list);
         mRecycler.setHasFixedSize(true);
 
         return rootView;

@@ -5,12 +5,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
-import me.srichomthong.savetogether.center.fragment.SalesListFragment;
+import me.srichomthong.savetogether.center.fragment.SalesResListFragment;
 import me.srichomthong.savetogether.utility.sharedstring.FirebaseTag;
 
-public class HistoryFragment extends SalesListFragment {
+public class HistoryFragmentRes extends SalesResListFragment {
 
-    public HistoryFragment() {}
+    public HistoryFragmentRes() {}
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     @Override

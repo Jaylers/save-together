@@ -4,7 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import me.srichomthong.savetogether.utility.sharedstring.FirebaseTag;
 
-public class SalesFragment extends SalesListFragment {
+public class SalesFragment extends SalesResListFragment {
 
     public SalesFragment() {}
 

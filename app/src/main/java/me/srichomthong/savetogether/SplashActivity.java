@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,20 +25,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.srichomthong.savetogether.center.AppSignatureHelper;
-import me.srichomthong.savetogether.center.EmailSignInActivity;
 import me.srichomthong.savetogether.center.SelectionAuthFragment;
 import me.srichomthong.savetogether.center.model.User;
 import me.srichomthong.savetogether.customer.CustomerMainActivity;
 import me.srichomthong.savetogether.restaurant.RestaurantMainActivity;
 import me.srichomthong.savetogether.utility.manager.AccountManager;
 import me.srichomthong.savetogether.utility.manager.ConnectionsManager;
-import me.srichomthong.savetogether.utility.manager.ToastManager;
 import me.srichomthong.savetogether.utility.sharedstring.SharedFlag;
 
 public class SplashActivity extends AppCompatActivity {

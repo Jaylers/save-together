@@ -1,30 +1,43 @@
 package me.srichomthong.savetogether.customer;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import me.srichomthong.savetogether.R;
+import me.srichomthong.savetogether.center.ProfileActivity;
 import me.srichomthong.savetogether.center.fragment.MenuFragment;
+import me.srichomthong.savetogether.center.fragment.SalesFragment;
 
-public class CustomerMainActivity extends AppCompatActivity {
-
-    @BindView(R.id.cus_mail_fragment_control) FrameLayout fragment_control;
+public class CustomerMainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,7 +46,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.cus_navigation_home:
-                    home();
+                    store();
                     return true;
                 case R.id.cus_navigation_review:
                     review();
@@ -45,7 +58,7 @@ public class CustomerMainActivity extends AppCompatActivity {
                     favorite();
                     return true;
                 case R.id.cus_navigation_menu:
-                    profile();
+                    menu();
                     return true;
             }
             return false;
@@ -59,52 +72,144 @@ public class CustomerMainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private GoogleApiClient mGoogleApiClient;
 
+    @BindView(R.id.cus_main_fragment_control)
+    FrameLayout fragment_control;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
+        ButterKnife.bind(this);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.cus_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         declareClass();
-        profile();
+        store();
     }
 
-    private void declareClass(){
+    private void declareClass() {
         mAuth = FirebaseAuth.getInstance();
         activity = this;
         currentUser = mAuth.getCurrentUser();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.cus_profile_map);
+        mapFragment.getMapAsync(CustomerMainActivity.this);
     }
 
-    private void home(){
+    private void store() {
+        fragment_control.setVisibility(View.INVISIBLE);
+        mPagerAdapter = null;
+        mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            private final Fragment[] mFragments = new Fragment[]{
+                    new SalesFragment()
+            };
+            private final String[] mFragmentNames = new String[]{
+                    getString(R.string.main_title_store),
+            };
+
+            @Override
+            public Fragment getItem(int position) {
+                return mFragments[position];
+            }
+
+            @Override
+            public int getCount() {
+                return mFragments.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mFragmentNames[position];
+            }
+        };
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = findViewById(R.id.reviewPager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.favoritePager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.menuPager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.salePager_cus_container);
+        mViewPager.setVisibility(View.VISIBLE);
+        mViewPager.setAdapter(mPagerAdapter);
+        TabLayout tabLayout = findViewById(R.id.tabs_cus_control);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void review() {
+        fragment_control.setVisibility(View.INVISIBLE);
+    }
+
+    private void nearBy() {
+        mViewPager = findViewById(R.id.reviewPager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.favoritePager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.menuPager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.salePager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        fragment_control.setVisibility(View.VISIBLE);
 
     }
 
-    private void review(){
-
+    private void favorite() {
+        fragment_control.setVisibility(View.INVISIBLE);
     }
 
-    private void nearBy(){
-        MapFragment mapFragment = new MapFragment();
-        android.app.FragmentManager manager = getFragmentManager();
-        android.app.FragmentTransaction ft = manager.beginTransaction();
-        ft.replace(R.id.cus_mail_fragment_control, mapFragment);
-        ft.commit();
+    private void menu() {
+        fragment_control.setVisibility(View.INVISIBLE);
+        mPagerAdapter = null;
+        mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            private final Fragment[] mMenuFragments = new Fragment[]{
+                    new MenuFragment()
+            };
+            private final String[] mFragmentNames = new String[]{
+                    getString(R.string.main_title_menu)
+            };
+
+            @Override
+            public Fragment getItem(int position) {
+                return mMenuFragments[position];
+            }
+
+            @Override
+            public int getCount() {
+                return mMenuFragments.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mFragmentNames[position];
+            }
+        };
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = findViewById(R.id.salePager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.favoritePager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.reviewPager_cus_container);
+        mViewPager.setVisibility(View.GONE);
+        mViewPager = findViewById(R.id.menuPager_cus_container);
+        mViewPager.setVisibility(View.VISIBLE);
+        mViewPager.setAdapter(mPagerAdapter);
+        TabLayout tabLayout = findViewById(R.id.tabs_cus_control);
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void favorite(){
+    private GoogleMap mMap;
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng locationMe = new LatLng(18.8013116, 98.9674135);
+        mMap.addMarker(new MarkerOptions()
+                .position(locationMe)
+                .title("Marker in Nimmanhaemin"));
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(18.8013116, 98.9674135)).zoom(16).build();
+        mMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition));
     }
-
-    private void profile(){
-        MenuFragment menuFragment = new MenuFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in,
-                R.anim.fade_out);
-        ft.replace(R.id.cus_mail_fragment_control, menuFragment);
-        ft.commit();
-    }
-
 }

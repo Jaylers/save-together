@@ -43,6 +43,6 @@ public class ProfileActivity extends AppCompatActivity implements OnMapReadyCall
         LatLng locationMe = new LatLng(18.8013116, 98.9674135);
         mMap.addMarker(new MarkerOptions()
                 .position(locationMe).title("Marker in Nimmanhaemin"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(locationMe));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMe, 16));
     }
 }
