@@ -1,18 +1,34 @@
 package me.srichomthong.savetogether.customer;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.MapFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import butterknife.BindView;
 import me.srichomthong.savetogether.R;
-import me.srichomthong.savetogether.utility.manager.SweetDialogManager;
+import me.srichomthong.savetogether.center.fragment.MenuFragment;
 
 public class CustomerMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    @BindView(R.id.cus_mail_fragment_control) FrameLayout fragment_control;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,6 +61,13 @@ public class CustomerMainActivity extends AppCompatActivity {
         }
     };
 
+    private FragmentPagerAdapter mPagerAdapter;
+    private ViewPager mViewPager;
+    private Activity activity;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private GoogleApiClient mGoogleApiClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +77,14 @@ public class CustomerMainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        SweetDialogManager sweetDialogManager = new SweetDialogManager(CustomerMainActivity.this);
-        sweetDialogManager.sweetInfo("Welcome","I hope you enjoy with us.");
+        declareClass();
+        profile();
+    }
+
+    private void declareClass(){
+        mAuth = FirebaseAuth.getInstance();
+        activity = this;
+        currentUser = mAuth.getCurrentUser();
     }
 
     private void home(){
@@ -67,7 +96,11 @@ public class CustomerMainActivity extends AppCompatActivity {
     }
 
     private void nearBy(){
-
+        MapFragment mapFragment = new MapFragment();
+        android.app.FragmentManager manager = getFragmentManager();
+        android.app.FragmentTransaction ft = manager.beginTransaction();
+        ft.replace(R.id.cus_mail_fragment_control, mapFragment);
+        ft.commit();
     }
 
     private void favorite(){
@@ -75,7 +108,13 @@ public class CustomerMainActivity extends AppCompatActivity {
     }
 
     private void profile(){
-
+        MenuFragment menuFragment = new MenuFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in,
+                R.anim.fade_out);
+        ft.replace(R.id.cus_mail_fragment_control, menuFragment);
+        ft.commit();
     }
 
 }

@@ -165,9 +165,8 @@ public class SignInActivity extends AppCompatActivity
     }
 
     @OnClick(R.id.img_facebook_sign_in) public void onFacebookSignIn(){
-        Intent intent = new Intent(SignInActivity.this, PhoneSignInActivity.class);
-        startActivity(intent);
-        this.finish();
+        SweetDialogManager sweet = new SweetDialogManager(SignInActivity.this);
+        sweet.sweetInfo(getString(R.string.app_message_message), getString(R.string.app_message_sign_in_with_facebook_coming));
     }
 
     @OnClick(R.id.img_email_sign_in) public void OnEmailSignIn(){
@@ -175,6 +174,12 @@ public class SignInActivity extends AppCompatActivity
         ActivityOptions options =
                 ActivityOptions.makeCustomAnimation(SignInActivity.this, R.anim.fade_in, R.anim.fade_out);
         startActivity(intent, options.toBundle());
+        this.finish();
+    }
+
+    @OnClick(R.id.img_phone_sign_in) public void onPhoneSignIn(){
+        Intent intent = new Intent(SignInActivity.this, PhoneSignInActivity.class);
+        startActivity(intent);
         this.finish();
     }
 
