@@ -42,14 +42,26 @@ public class AccountManager {
     }
 
     public void writeUser(FirebaseUser user){
-        String url;
+        String email, name, mobile, url;
+
+        if (user.getEmail() == null){
+            email = "";
+        }else email = user.getEmail();
+
+        if (user.getDisplayName() == null){
+            name = "";
+        }else name = user.getDisplayName();
+
+        if (user.getPhoneNumber() == null){
+            mobile = "";
+        }else mobile = user.getPhoneNumber();
+
         if (user.getPhotoUrl() != null){
             url = user.getPhotoUrl().toString();
         }else url = "";
 
-        User users = new User( user.getUid(), "", user.getEmail(), user.getDisplayName(),
-                user.getPhoneNumber(), "", user.getProviders().toString(), url
-                , sharedSignedUser.getTypeOfUser());
+        User users = new User( user.getUid(), "", email, name, mobile, "",
+                user.getProviders().toString(), url, sharedSignedUser.getTypeOfUser());
         mDatabase.child(FirebaseTag.users).child(user.getUid()).setValue(users);
     }
 

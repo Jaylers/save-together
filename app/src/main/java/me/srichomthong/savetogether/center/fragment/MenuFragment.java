@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.srichomthong.savetogether.R;
+import me.srichomthong.savetogether.center.PrivacyAndPolicyActivity;
 import me.srichomthong.savetogether.center.ProfileActivity;
 import me.srichomthong.savetogether.utility.manager.AccountManager;
 import me.srichomthong.savetogether.utility.manager.SweetDialogManager;
@@ -73,37 +74,40 @@ public class MenuFragment extends Fragment {
 
     @OnClick(R.id.fragment_menu_announce_img) public void onAnnounce(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "This will display a news from Developer team");
     }
 
     @OnClick(R.id.fragment_menu_privacy_img) public void onPrivacy(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "This will display Privacy and Policy");
+        Intent intent = new Intent(activity, PrivacyAndPolicyActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.fragment_menu_notification_img) public void onNotification(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "This will let user setting application's notification");
     }
 
     @OnClick(R.id.fragment_menu_report_img) public void onReport(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "The application may crash or include of a few bug, Don’t hesitate to let " +
+                        "we know about this.");
     }
 
     @OnClick(R.id.fragment_menu_care_img) public void onCustomerCare(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "We will provide user to get help from us, if necessary.");
     }
 
     @OnClick(R.id.fragment_menu_facebook_img) public void onFacebook(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "Our facebook, coming soon");
     }
 
     @OnClick(R.id.fragment_menu_g_plus_img) public void onGooglePlus(){
         sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+                "Our Google Plus");
     }
 
 }
