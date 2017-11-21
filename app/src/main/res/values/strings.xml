@@ -7,6 +7,8 @@
     <string name="fb_login_protocol_scheme">fb463835870676974</string>
     <string name="facebook_redirect_link">https://save-together.firebaseapp.com/__/auth/handler</string>
 
+    <string name="google_maps_key">AIzaSyD4sETSGazkNaeNOZiQsXetvl9C24NlJkw</string>
+
     //Auth
     <string name="app_message_user_gmail">User Gmail Account</string>
     <string name="app_message_username">Username</string>
@@ -22,12 +24,15 @@
     <string name="app_message_re_send">Re Send</string>
     <string name="app_message_verify">Verify</string>
     <string name="app_message_welcome">Welcome </string>
+    <string name="app_message_sign_in_with_facebook_coming">Sign in with Facebook coming soon</string>
+    <string name="app_message_coming_soon">Coming soon</string>
 
     //Error message
     <string name="err_message_required">Required</string>
     <string name="err_message_connection_failure">Network connection error \n Please check your connection</string>
     <string name="err_unknown">Unknown</string>
     <string name="err_">Error</string>
+    <string name="err_warning">Warning</string>
     <string name="err_unknown_error">Something wrong! That\'s all we know.</string>
     <string name="err_connection_error">Connection error</string>
     <string name="err_google_play_error">Google Play service error</string>
@@ -102,4 +107,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+
+    ////Sale//////////////////////////////////////
+    <string name="app_message_new_sale">New Sale</string>
+    <string name="app_shop_name">Shop name</string>
+    <string name="app_shop_detail">Here\'s a detail!</string>
 </resources>

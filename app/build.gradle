@@ -25,11 +25,6 @@ def dependencyGroup(Closure closure) {
 }
 
 def ui = dependencyGroup {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:support-v4:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
     compile 'com.github.santalu:emptyview:1.0.3'
@@ -49,10 +44,17 @@ def firebase = dependencyGroup {
     compile 'com.google.firebase:firebase-crash:11.6.0'
     compile 'com.google.firebase:firebase-messaging:11.6.0'
     compile 'com.google.firebase:firebase-invites:11.6.0'
+    compile 'com.firebaseui:firebase-ui-database:1.2.0'
 }
 
 def facebook = dependencyGroup {
     //compile('com.facebook.android:facebook-android-sdk:4.27.0')
+}
+
+def googleMaps = dependencyGroup {
+    compile 'com.google.android.gms:play-services-maps:11.6.0'
+    compile 'com.google.android.gms:play-services-places:11.6.0'
+    compile 'com.google.android.gms:play-services-nearby:11.6.0'
 }
 
 def injection = dependencyGroup {
@@ -70,6 +72,10 @@ def dialog = dependencyGroup {
     compile 'com.github.thomper:sweet-alert-dialog:v1.4.0'
 }
 
+def tools = dependencyGroup{
+    compile 'com.wdullaer:materialdatetimepicker:3.4.0'
+}
+
 def test = dependencyGroup {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -82,16 +88,26 @@ def annotation = dependencyGroup {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.android.gms:play-services-maps:11.6.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     ui()
     injection()
     firebase()
     facebook()
     google()
+    googleMaps()
     image()
     dialog()
+    tools()
     test()
     annotation()
 }
+
+
 
 
 
