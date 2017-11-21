@@ -40,6 +40,7 @@
     <string name="err_invalid_phone_code">Invalid code!</string>
     <string name="err_invalid_phone_number">Invalid phone number.</string>
     <string name="err_phone_sign_up_quota_exceeded">The quota of sign up with phone number is exceeded. Please continue with orther way or try again on next day.</string>
+    <string name="err_only_number_require">Only number</string>
 
     //Dangerous
     <string name="app_message_request_permission_call">Please allow us to make a Call</string>
@@ -90,13 +91,14 @@
     <string name="language_thailand"> ภาษาไทย</string>
     <string name="language_english"> English</string>
 
-    <string name="main_title_home">Home</string>
+    <string name="main_title_store">Store</string>
     <string name="main_title_review">Review</string>
     <string name="main_title_near_by">Near By</string>
     <string name="main_title_favorite">Favorite</string>
     <string name="main_title_profile">Profile</string>
     <string name="main_title_sale">Sale</string>
     <string name="main_title_history">History</string>
+    <string name="main_title_menu">Menu</string>
 
     <string name="title_activity_sign_in">Sign in</string>
     <string name="title_activity_sign_in_selection">Sign in with Email</string>
@@ -108,11 +110,22 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_message_end_sale">End sale time : </string>
     <string name="title_activity_maps">Map</string>
 
     ////Sale//////////////////////////////////////
     <string name="app_message_new_sale">New Sale</string>
     <string name="app_shop_name">Shop name</string>
     <string name="app_shop_detail">Here\'s a detail!</string>
+    <string name="app_date_please_select">Please Select date</string>
+    <string name="app_message_selling">Selling...</string>
+    <string name="app_message_sale_done">The product is now on the market</string>
+    <string name="app_message_product_name">Here\'s a product name</string>
+    <string name="app_message_product_full_price">Here\'s a full price</string>
+    <string name="app_message_product_new_price">Here\'s a new price</string>
+    <string name="app_message_product_count">Here\'s a number of product</string>
+    <string name="app_message_product_detail">Here\'s a detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

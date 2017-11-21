@@ -21,7 +21,7 @@
 
         <RelativeLayout
             android:id="@+id/star_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/post_author_layout"
             android:layout_alignParentEnd="true"
@@ -35,14 +35,14 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:gravity="center"
-                tools:text="7" />
+                tools:text="0" />
 
             <ImageView
                 android:id="@+id/star"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:layout_marginEnd="5dp"
                 android:background="?attr/selectableItemBackground"
                 android:src="@drawable/ic_star_empty" />

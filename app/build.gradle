@@ -72,7 +72,7 @@ def dialog = dependencyGroup {
     compile 'com.github.thomper:sweet-alert-dialog:v1.4.0'
 }
 
-def tools = dependencyGroup{
+def tools = dependencyGroup {
     compile 'com.wdullaer:materialdatetimepicker:3.4.0'
 }
 
@@ -106,6 +106,8 @@ dependencies {
     test()
     annotation()
 }
+
+
 
 
 

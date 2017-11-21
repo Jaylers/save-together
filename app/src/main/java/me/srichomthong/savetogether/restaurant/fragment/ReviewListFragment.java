@@ -1,4 +1,4 @@
-//package me.srichomthong.savetogether.customer.fragment;
+package me.srichomthong.savetogether.restaurant.fragment;//package me.srichomthong.savetogether.customer.fragment;
 //
 //import android.content.Intent;
 //import android.os.Bundle;

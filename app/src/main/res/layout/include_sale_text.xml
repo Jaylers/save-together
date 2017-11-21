@@ -13,6 +13,7 @@
         android:src="@drawable/ic_facebook_circle"/>
 
     <LinearLayout
+        android:id="@+id/group_detail"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_toEndOf="@+id/sale_item_photo"

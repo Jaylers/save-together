@@ -5,14 +5,20 @@ package me.srichomthong.savetogether.utility.sharedstring;
  */
 
 public class SharedFlag {
-    public static String flag_restart =                 "RESTART";
-    public static String flag_close =                   "CLOSE";
-    public static String flag_language_en =             "EN";
-    public static String flag_language_th =             "TH";
-    public static String flag_customer =                "CUSTOMER";
-    public static String flag_restaurant =              "RESTAURANT";
-    public static String flag_unknown =                 "UNKNOWN";
+    public static String flag_restart =                     "RESTART";
+    public static String flag_close =                       "CLOSE";
+    public static String flag_language_en =                 "EN";
+    public static String flag_language_th =                 "TH";
+    public static String flag_customer =                    "CUSTOMER";
+    public static String flag_restaurant =                  "RESTAURANT";
+    public static String flag_unknown =                     "UNKNOWN";
 
-    public static String flag_customer_color_theme =    "#F1C40F";
-    public static String flag_restaurant_color_theme =  "#E26A6A";
+    public static String flag_customer_color_theme =        "#F1C40F";
+    public static String flag_restaurant_color_theme =      "#E26A6A";
+
+    public static String flag_pager_store =                 "STORE";
+    public static String flag_pager_review =                "REVIEW";
+    public static String flag_pager_sale =                  "SALE";
+    public static String flag_pager_history =               "HISTORY";
+    public static String flag_pager_menu =                  "MENU";
 }

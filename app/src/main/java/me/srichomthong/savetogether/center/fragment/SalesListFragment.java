@@ -1,6 +1,5 @@
-package me.srichomthong.savetogether.customer.fragment;
+package me.srichomthong.savetogether.center.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +23,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import me.srichomthong.savetogether.R;
 import me.srichomthong.savetogether.center.model.Sale;
-import me.srichomthong.savetogether.customer.viewholder.SaleViewHolder;
+import me.srichomthong.savetogether.center.viewholder.SaleViewHolder;
 import me.srichomthong.savetogether.utility.sharedstring.FirebaseTag;
 
 public abstract class SalesListFragment extends Fragment {
@@ -36,6 +37,7 @@ public abstract class SalesListFragment extends Fragment {
     private FirebaseRecyclerAdapter<Sale, SaleViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
+    View rootView;
 
     public SalesListFragment() {}
 
@@ -43,13 +45,13 @@ public abstract class SalesListFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_all_sale, container, false);
+        rootView = inflater.inflate(R.layout.fragment_res_sale, container, false);
 
         // [START create_database_reference]
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END create_database_reference]
 
-        mRecycler = (RecyclerView) rootView.findViewById(R.id.messages_list);
+        mRecycler = rootView.findViewById(R.id.messages_list);
         mRecycler.setHasFixedSize(true);
 
         return rootView;
@@ -69,10 +71,6 @@ public abstract class SalesListFragment extends Fragment {
         Query postsQuery = getQuery(mDatabase);
         mAdapter = new FirebaseRecyclerAdapter<Sale, SaleViewHolder>(Sale.class, R.layout.item_sale,
                 SaleViewHolder.class, postsQuery) {
-            @Override
-            public SaleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
-            }
 
             @Override
             protected void populateViewHolder(final SaleViewHolder viewHolder, final Sale model, final int position) {
@@ -94,14 +92,18 @@ public abstract class SalesListFragment extends Fragment {
                     viewHolder.saleStar.setImageResource(R.drawable.ic_star_empty);
                 }
 
+                Glide.with(rootView)
+                        .load(model.shop_url)
+                        .into(viewHolder.authorImage);
+
                 // Bind Post to ViewHolder, setting OnClickListener for the star button
-                viewHolder.bindToPost( model, new View.OnClickListener() {
+                viewHolder.bindToSale( model, new View.OnClickListener() {
                     @Override
                     public void onClick(View starView) {
                         // Need to write to both places the post is stored
-                        DatabaseReference globalPostRef = mDatabase.child(FirebaseTag.sale)
+                        DatabaseReference globalPostRef = mDatabase.child(FirebaseTag.sales)
                                 .child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child(FirebaseTag.sale_user)
+                        DatabaseReference userPostRef = mDatabase.child(FirebaseTag.sales_user)
                                 .child(model.saleShop).child(postRef.getKey());
 
                         // Run two transactions

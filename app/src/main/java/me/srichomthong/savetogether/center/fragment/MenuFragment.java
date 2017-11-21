@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.srichomthong.savetogether.R;
 import me.srichomthong.savetogether.center.ProfileActivity;
+import me.srichomthong.savetogether.utility.manager.AccountManager;
 import me.srichomthong.savetogether.utility.manager.SweetDialogManager;
 
 /**
@@ -66,8 +67,8 @@ public class MenuFragment extends Fragment {
     }
 
     @OnClick(R.id.fragment_menu_setting_img) public void onSetting(){
-        sweet.sweetInfo(activity.getString(R.string.app_message_message),
-                activity.getString(R.string.app_message_coming_soon));
+        AccountManager accountManager = new AccountManager(activity);
+        accountManager.signOut();
     }
 
     @OnClick(R.id.fragment_menu_announce_img) public void onAnnounce(){

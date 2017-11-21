@@ -1,18 +1,15 @@
 package me.srichomthong.savetogether.customer;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -27,7 +24,6 @@ import me.srichomthong.savetogether.center.fragment.MenuFragment;
 
 public class CustomerMainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     @BindView(R.id.cus_mail_fragment_control) FrameLayout fragment_control;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -37,23 +33,18 @@ public class CustomerMainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.cus_navigation_home:
-                    mTextMessage.setText(R.string.main_title_home);
                     home();
                     return true;
                 case R.id.cus_navigation_review:
-                    mTextMessage.setText(R.string.main_title_review);
                     review();
                     return true;
                 case R.id.cus_navigation_near_by:
-                    mTextMessage.setText(R.string.main_title_near_by);
                     nearBy();
                     return true;
                 case R.id.cus_navigation_favorite:
-                    mTextMessage.setText(R.string.main_title_favorite);
                     favorite();
                     return true;
-                case R.id.cus_navigation_profile:
-                    mTextMessage.setText(R.string.main_title_profile);
+                case R.id.cus_navigation_menu:
                     profile();
                     return true;
             }
@@ -73,7 +64,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

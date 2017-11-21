@@ -1,4 +1,4 @@
-package me.srichomthong.savetogether.customer.fragment;
+package me.srichomthong.savetogether.center.fragment;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
@@ -10,13 +10,8 @@ public class SalesFragment extends SalesListFragment {
 
     @Override
     public Query getQuery(DatabaseReference databaseReference) {
-        // [START my_top_posts_query]
-        // My top posts by number of stars
-        String myUserId = getUid();
-        Query myTopPostsQuery = databaseReference.child(FirebaseTag.sale)
+        Query allSalesQuery = databaseReference.child(FirebaseTag.sales)
                 .limitToFirst(100);
-        // [END my_top_posts_query]
-
-        return myTopPostsQuery;
+        return allSalesQuery;
     }
 }

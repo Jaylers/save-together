@@ -30,7 +30,7 @@
 //        saleDiscount = (TextView) itemView.findViewById(R.id.post_route);
 //    }
 //
-//    public void bindToPost(Post post, View.OnClickListener starClickListener) {
+//    public void bindToSale(Post post, View.OnClickListener starClickListener) {
 //
 //        saleTitle.setText(post.title);
 //        authorView.setText(post.author);

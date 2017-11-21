@@ -87,7 +87,7 @@
 //                }
 //
 //                // Bind Post to ViewHolder, setting OnClickListener for the star button
-//                viewHolder.bindToPost( model, new View.OnClickListener() {
+//                viewHolder.bindToSale( model, new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View starView) {
 //                        // Need to write to both places the post is stored

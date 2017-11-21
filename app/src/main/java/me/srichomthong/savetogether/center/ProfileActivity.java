@@ -10,8 +10,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.srichomthong.savetogether.R;
 
 public class ProfileActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -28,13 +32,17 @@ public class ProfileActivity extends AppCompatActivity implements OnMapReadyCall
         mapFragment.getMapAsync(ProfileActivity.this);
     }
 
+    private void setData(){
+
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng locationMe = new LatLng(18.8013116, 98.9674135);
-        mMap.addMarker(new MarkerOptions().position(locationMe).title("Marker in Nimmanhaemin"));
+        mMap.addMarker(new MarkerOptions()
+                .position(locationMe).title("Marker in Nimmanhaemin"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(locationMe));
     }
 }

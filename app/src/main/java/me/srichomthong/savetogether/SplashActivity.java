@@ -237,14 +237,20 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void openBaseAuth(){
-        mContentView.setVisibility(View.GONE);
-        SelectionAuthFragment selectionAuthFragment = new SelectionAuthFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in_smooth,
-                R.anim.fade_out);
-        ft.replace(R.id.frame_fragment_base_auth, selectionAuthFragment);
-        ft.commit();
+        try {
+            mContentView.setVisibility(View.GONE);
+            SelectionAuthFragment selectionAuthFragment = new SelectionAuthFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.setCustomAnimations(R.anim.fade_in_smooth,
+                    R.anim.fade_out);
+            ft.replace(R.id.frame_fragment_base_auth, selectionAuthFragment);
+            ft.commit();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            AccountManager accountManager = new AccountManager(SplashActivity.this);
+            accountManager.restartApp();
+        }
     }
 
     private int confirm = 0;

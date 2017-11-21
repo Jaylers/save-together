@@ -10,17 +10,23 @@ import java.util.Map;
  */
 
 public class Sale {
-    public String saleId;
-    public  String saleName;
-    public String saleDetail;
-    public int saleFullPrice;
-    public int salePrice;
-    public String saleShop;
-    public TimeRange timeRange;
+    public static String saleId;
+    public static String saleName;
+    public static String saleDetail;
+    public static int saleFullPrice;
+    public static int salePrice;
+    public static String saleShop;
+    public static String saleShopName;
+    public static String shop_url;
+    public static String timeRange;
+    public static int count;
     public int starCount;
-    public Map<String, Boolean> stars = new HashMap<>();
+    public static Map<String, Boolean> stars = new HashMap<>();
 
-    public Sale(String saleId, String saleName, String saleDetail, int saleFullPrice, int salePrice, String saleShop, TimeRange timeRange, int starCount) {
+    public Sale() {
+    }
+
+    public Sale(String saleId, String saleName, String saleDetail, int saleFullPrice, int salePrice, String saleShop, String timeRange, int starCount) {
         this.saleId = saleId;
         this.saleName = saleName;
         this.saleDetail = saleDetail;
@@ -31,9 +37,24 @@ public class Sale {
         this.starCount = starCount;
     }
 
+    public Sale(String saleId, String saleName, String saleDetail, int saleFullPrice, int salePrice,
+                String saleShop, String timeRange, String saleShopName, int count, String shop_url) {
+        this.saleId = saleId;
+        this.saleName = saleName;
+        this.saleDetail = saleDetail;
+        this.saleFullPrice = saleFullPrice;
+        this.salePrice = salePrice;
+        this.saleShop = saleShop;
+        this.timeRange = timeRange;
+        this.saleShopName = saleShopName;
+        this.count = count;
+        this.shop_url = shop_url;
+
+    }
+
     // [START post_to_map]
     @Exclude
-    public Map<String, Object> toMap() {
+    public static Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("saleId", saleId);
         result.put("saleName", saleName);
@@ -42,6 +63,9 @@ public class Sale {
         result.put("salePrice", salePrice);
         result.put("saleShop", saleShop);
         result.put("time", timeRange);
+        result.put("saleShopName", saleShopName);
+        result.put("count", count);
+        result.put("shop_url", shop_url);
         result.put("star", stars);
         return result;
     }
@@ -95,11 +119,11 @@ public class Sale {
         this.saleShop = saleShop;
     }
 
-    public TimeRange getTimeRange() {
+    public String getTimeRange() {
         return timeRange;
     }
 
-    public void setTimeRange(TimeRange timeRange) {
+    public void setTimeRange(String timeRange) {
         this.timeRange = timeRange;
     }
 
