@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -76,7 +76,15 @@
             android:name=".center.ProfileActivity"
             android:label="@string/main_title_profile"
             android:screenOrientation="portrait" />
-        <activity android:name=".restaurant.AddSaleActivity"></activity>
+        <activity android:name=".restaurant.AddSaleActivity" />
+        <activity
+            android:name=".center.UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/FullscreenNoActionBar" />
+        <activity
+            android:name=".center.PrivacyAndPolicyActivity"
+            android:label="@string/title_activity_privacy_and_policy"
+            android:theme="@style/FullscreenNoActionBar"></activity>
     </application>
 
 </manifest>
